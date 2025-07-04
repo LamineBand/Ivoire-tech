@@ -1,0 +1,10 @@
+#carouselExampleAutoplaying {
+  background-color: #ff6f00;
+  color: #ffffff;
+  width: 100%;
+  margin: 0;
+  position: fixed;
+  top: 0; /* Ajouté */
+  left: 0; /* Ajouté */
+  z-index: 1000; /* Pour être au-dessus des autres éléments */
+}

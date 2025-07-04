@@ -1,0 +1,8 @@
+#corps_produit {
+  margin-left: 16.666%;
+}
+@media (max-width: 767px) {
+  #corps_produit {
+    margin-left: 0;
+  }
+}

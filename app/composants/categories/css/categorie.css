@@ -1,0 +1,17 @@
+#cat {
+  text-decoration: none;
+}
+img {
+  height: 120px;
+  object-fit: contain;
+}
+
+#catShad {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#catShad:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* effet de "lévitation" en bonus */
+  border: none;
+}

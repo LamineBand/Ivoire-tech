@@ -1,0 +1,15 @@
+#img_Car {
+  height: 30rem;
+  object-fit: contain;
+  margin-top: 3rem;
+}
+
+@media (max-width: 990px) {
+  #container_General {
+    margin-top: 6rem;
+  }
+  #img_Car {
+    object-fit: contain;
+    margin-top: -5rem;
+  }
+}

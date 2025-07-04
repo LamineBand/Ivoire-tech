@@ -1,0 +1,84 @@
+#navbar {
+  background-color: #0a4580;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 1.5rem;
+}
+#navbar li a {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Conteneur modal centré, dimension raisonnable */
+.modern-modal {
+  position: relative;
+  background: white;
+  border-radius: 30px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px; /* Largeur maximale sur grand écran */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+  margin: 0 auto; /* Assure le centrage horizontal */
+}
+
+/* Bouton flottant propre */
+.floating-close {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  background: white;
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+/* Input centré et responsive */
+.modern-input {
+  width: 100%; /* Prend toute la largeur dispo */
+  max-width: 400px; /* Largeur max de l'input */
+  padding: 0.7rem 1rem;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.modal-body {
+  margin: 0;
+}
+
+.floating-close {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  background: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex; /* Flex pour centrer le X */
+  justify-content: center;
+  align-items: center;
+  width: 32px; /* Diamètre fixe */
+  height: 32px; /* Diamètre fixe */
+  background-size: 0; /* Masque l'icône par défaut */
+}
+
+.floating-close::after {
+  display: none; /* Masque pseudo-element Bootstrap si nécessaire */
+}
+
+.floating-close span {
+  font-size: 16px;
+  line-height: 1;
+}
+.floating-close:hover {
+  background: #f0f0f0;
+}

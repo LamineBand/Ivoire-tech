@@ -1,0 +1,47 @@
+.testimonial-card {
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #ccc;
+}
+
+.testimonial-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.stars {
+  color: #f5c518; /* jaune doré */
+  font-size: 16px;
+}
+
+.testimonial-message {
+  font-style: italic;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
+}

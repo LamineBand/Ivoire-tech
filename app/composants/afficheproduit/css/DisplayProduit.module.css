@@ -1,0 +1,66 @@
+/* app/composants/afficheproduit/css/DisplayProduit.module.css */
+
+.modernModal {
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.floatingClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+}
+
+.floatingClose span {
+  font-weight: bold;
+}
+
+.modernInput {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0 10px;
+}
+
+.productCard {
+  display: flex;
+  gap: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 8px;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.detailButton {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background-color: #0d6efd;
+  color: white;
+}
+
+.addButton {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background-color: #198754;
+  color: white;
+}

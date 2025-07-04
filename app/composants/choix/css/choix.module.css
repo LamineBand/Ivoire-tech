@@ -1,0 +1,42 @@
+/* Positionne la croix en haut à droite */
+.closeLink {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.closeLink:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+/* InscriptionVendeur.module.css */
+
+.pageWrapper {
+  background-image: url("/img/msi.jpg"); /* change le nom selon ton image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.choixBox {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
