@@ -108,7 +108,14 @@ function Navbar({ onOpenModal }: NavbarProps) {
             </ul>
 
             {/* === Icônes panier et user === */}
-            <div className="d-flex">
+            <div className="d-flex align-items-center">
+              <button
+                onClick={onOpenModal}
+                className="btn btn-link"
+                style={{ color: "white" }}
+              >
+                <Search size={28} strokeWidth={2.2} />
+              </button>{" "}
               <Link
                 href={"/composants/panier"}
                 type="button"

@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@imagekit/next": "^2.1.2",
     "@uploadcare/react-uploader": "^1.8.1",
-    "@uploadcare/upload-client": "^6.15.2",
     "axios": "^1.10.0",
     "bootstrap": "^5.3.6",
     "firebase": "^11.9.1",
