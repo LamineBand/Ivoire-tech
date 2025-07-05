@@ -163,19 +163,19 @@ const DisplayProduit: React.FC<Props> = ({
           Voir tous les produits →
         </Link>
       </div>
-
+      {/** Recherche de produit depuis la base de donnée et affichage */}
       {loading ? (
         <div className="text-center">
           <div className="spinner-border text-primary" role="status"></div>
         </div>
       ) : (
         <div className="row g-4">
-          {produits.length === 0 ? (
+          {produits && produits.length === 0 ? (
             <div className="text-center">
               <p className="text-muted">Aucun produit disponible.</p>
             </div>
           ) : (
-            produits.map((prod) => (
+            produits?.map((prod) => (
               <div key={prod._id} className="col-sm-6 col-md-4 col-lg-3">
                 <div className="card h-100 shadow-sm">
                   <img

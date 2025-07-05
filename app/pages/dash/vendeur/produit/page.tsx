@@ -10,6 +10,7 @@ import { SuppProd } from "@/app/controllers/vendeur/SuppProd";
 import { ModifProduit } from "@/app/controllers/vendeur/modifproduit";
 import { FileUploaderRegular } from "@uploadcare/react-uploader/next";
 import "@uploadcare/react-uploader/core.css";
+
 import {
   OutputCollectionState,
   OutputCollectionStatus,
@@ -26,6 +27,7 @@ interface Produit {
   descriptionProduit: string;
   imageProduit?: string;
 }
+
 function Produit() {
   // ✅ VARIABLES D'ÉTAT POUR LE FORMULAIRE
   const [nomProduit, setNomProduit] = useState("");

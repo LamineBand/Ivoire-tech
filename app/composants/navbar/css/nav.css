@@ -82,3 +82,14 @@
 .floating-close:hover {
   background: #f0f0f0;
 }
+.offcanvas {
+  max-width: 300px; /* Largeur fixe sympa */
+}
+
+.offcanvas-header {
+  background-color: #f8f9fa;
+}
+
+.offcanvas-body {
+  background-color: #fff;
+}
