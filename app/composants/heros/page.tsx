@@ -64,7 +64,7 @@ function Hero() {
               <div className="carousel-item active" data-bs-interval="1500">
                 <img
                   id="img_Car"
-                  src="/img/nh1.jpg"
+                  src="/img/r4.png"
                   className="d-block w-100"
                   alt=""
                 />
@@ -72,7 +72,7 @@ function Hero() {
               <div className="carousel-item" data-bs-interval="1500">
                 <img
                   id="img_Car"
-                  src="/img/montre.jpg"
+                  src="/img/r3.png"
                   className="d-block w-100"
                   alt="..."
                 />
@@ -80,7 +80,7 @@ function Hero() {
               <div className="carousel-item" data-bs-interval="1500">
                 <img
                   id="img_Car"
-                  src="/img/ca3.jpg"
+                  src="/img/r2.png"
                   className="d-block w-100"
                   alt="..."
                 />
@@ -88,7 +88,7 @@ function Hero() {
               <div className="carousel-item" data-bs-interval="1500">
                 <img
                   id="img_Car"
-                  src="/img/ip.webp"
+                  src="/img/r1.png"
                   className="d-block w-100"
                   alt="..."
                 />

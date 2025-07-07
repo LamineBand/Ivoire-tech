@@ -86,22 +86,22 @@ function Navbar({ onOpenModal }: NavbarProps) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link href={"/"} className="nav-link">
                   Accueil
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <Link href={"#"} className="nav-link">
+                <Link href={"/pages/tout_produit/"} className="nav-link">
                   Nos produits
                 </Link>
               </li>
               <li className="nav-item">
-                <Link href={"#"} className="nav-link">
+                <Link href={"/pages/apropos/"} className="nav-link">
                   A propos de nous
                 </Link>
               </li>
               <li className="nav-item">
-                <Link href={"#"} className="nav-link">
+                <Link href={"/pages/contact/"} className="nav-link">
                   Contactez nous
                 </Link>
               </li>

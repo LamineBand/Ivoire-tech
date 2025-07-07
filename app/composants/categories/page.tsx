@@ -124,7 +124,7 @@ function Categorie_Section() {
                 <img
                   className="mt-auto mb-auto"
                   id="prod"
-                  src="/img/pav.png"
+                  src="/img/pav1.png"
                   alt="Produit 2"
                   style={{
                     width: "100px",

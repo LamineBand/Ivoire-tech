@@ -177,21 +177,25 @@ const DisplayProduit: React.FC<Props> = ({
           ) : (
             produits?.map((prod) => (
               <div key={prod._id} className="col-sm-6 col-md-4 col-lg-3">
-                <div className="card h-100 shadow-sm">
+                <div className="card h-100 shadow-sm border-0">
                   <img
-                    src={prod.imageProduit}
-                    className="card-img-top img-fluid mt-3"
+                    src={
+                      prod.imageProduit ||
+                      "https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+                    }
+                    className="card-img-top"
                     alt={prod.nomProduit}
-                    style={{ objectFit: "contain", height: "150px" }}
+                    style={{
+                      height: "180px",
+                      objectFit: "cover",
+                      borderTopLeftRadius: "0.5rem",
+                      borderTopRightRadius: "0.5rem",
+                    }}
                   />
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title fw-bold">{prod.nomProduit}</h5>
-                    {/*
-                    <p className="text-muted mb-1">
-                      Catégorie : {prod.categorieProduit}
-                    </p>
-                   */}
-                    <p className="mb-1" style={{ margin: 0 }}>
+
+                    <p className="mb-1">
                       {prod.stockProduit === 0 ? (
                         <span style={{ color: "red" }}>
                           Produit en rupture de stock
@@ -204,11 +208,12 @@ const DisplayProduit: React.FC<Props> = ({
                         </span>
                       )}
                     </p>
-                    <p className="fw-bold  mb-2 fs-4">
+
+                    <p className="fw-bold mb-2 fs-5">
                       {prod.prixProduit.toLocaleString()} FCFA
                     </p>
 
-                    <div className="d-flex justify-content-between mt-3">
+                    <div className="d-flex justify-content-between mt-auto">
                       <button
                         className="btn btn-sm btn-primary d-flex align-items-center"
                         onClick={() => handleAddToCart(prod)}

@@ -20,7 +20,7 @@ export default function Home() {
   const closeModal = () => setShowModal(false);
 
   return (
-    <main>
+    <main style={{ backgroundColor: "#f8f9fa" }}>
       <Carous1 />
       <Navbar {...({ onOpenModal: openModal } as NavbarProps)} />
       <Hero />

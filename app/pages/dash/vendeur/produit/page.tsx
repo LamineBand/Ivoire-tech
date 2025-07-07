@@ -10,6 +10,9 @@ import { SuppProd } from "@/app/controllers/vendeur/SuppProd";
 import { ModifProduit } from "@/app/controllers/vendeur/modifproduit";
 import { FileUploaderRegular } from "@uploadcare/react-uploader/next";
 import "@uploadcare/react-uploader/core.css";
+import imageCompression from "browser-image-compression";
+import { upload } from "@imagekit/next";
+//import upload from "imagekit-javascript";
 
 import {
   OutputCollectionState,
@@ -150,28 +153,75 @@ function Produit() {
     console.log(obj);
     setmodifProd(obj);
   }
-  // pour uploader photo
+  // pour uploader photo uploadCare
 
-  const [files, setFiles] = useState<OutputFileEntry<OutputFileStatus>[]>([]);
   const uploadImage = (
     e: OutputCollectionState<OutputCollectionStatus, "maybe-has-group">
   ) => {
-    setFiles([...e.allEntries.filter((file) => file.status === "success")]);
-  };
-  useEffect(() => {
-    if (files.length > 0) {
-      if (files[0].cdnUrl) {
-        setImageProduit(files[0].cdnUrl);
-      }
+    const url = e?.allEntries[0]?.cdnUrl;
+    console.log(url);
 
-      //console.log("img prod ==", files[0].cdnUrl);
-    }
-  }, [files]);
+    setImageProduit(url || "");
+  };
+
   useEffect(() => {
     console.log("IMG ===");
 
     console.log(imageProduit);
   }, [imageProduit]);
+
+  //pour image imagekit
+  //Upload avec ImageKit
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleImageChange = (file: React.ChangeEvent<HTMLInputElement>) => {
+    const fileSelected = file?.target?.files![0];
+    if (fileSelected) {
+      console.log(fileSelected);
+      const url = URL.createObjectURL(fileSelected);
+      setImageProduit(url);
+      setFile(fileSelected);
+    }
+  };
+
+  //Sauvagarde de l'image dans imagekit
+  const sendImage = async () => {
+    try {
+      //On se connecte avec imageKit
+      const response = await fetch("/serveur-api/imagekit-auth");
+      const data = await response.json();
+      const { signature, expire, token, publicKey } = data;
+
+      if (!file) return alert("Selectionnecter une image valide");
+      if (file && file.size > 1024 * 1024 * 2)
+        return { message: "Selectionner une image inférireur à 2Mb" };
+
+      // Options de compression
+      const options = {
+        maxWidthOrHeight: 800,
+        useWebWorker: true,
+        fileType: "image/webp",
+      };
+
+      // Convertir l'image en WebP
+      const compressedImage = await imageCompression(file, options);
+
+      //Envoie à imageKit.io
+      const uploadResponse = await upload({
+        expire,
+        token,
+        signature,
+        publicKey,
+        file: compressedImage,
+        fileName: `${Date.now()}.webp`,
+      });
+      console.log("Upload response:", uploadResponse.url);
+      setProduits((prev) => ({ ...prev, image: uploadResponse?.url! }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container-fluid">
       <Navdash />
@@ -214,7 +264,7 @@ function Produit() {
           {/* Grille de produits */}
           <div className="row g-4">
             {produits.map((item) => (
-              <div key={item._id} className="col-md-4">
+              <div key={item._id!} className="col-md-4">
                 {/**debu de car */}
                 <div className="card h-100 border-0 shadow rounded-4 overflow-hidden">
                   <div
@@ -222,7 +272,10 @@ function Produit() {
                     style={{ height: "160px" }}
                   >
                     <img
-                      src={item.imageProduit}
+                      src={
+                        item.imageProduit ||
+                        "https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+                      }
                       alt="Produit"
                       className="mt-2"
                       style={{
@@ -374,9 +427,22 @@ function Produit() {
                   </label>
                   <div>
                     <FileUploaderRegular
-                      pubkey={process.env.NEXT_PUBLIC_IMG!}
+                      pubkey="8ed532fcdc0227b44723"
+                      /*   pubKey={process.env.NEXT_PUBLIC_IMG!} */
                       onChange={uploadImage}
                     />
+
+                    <img src={imageProduit} alt="" />
+
+                    {/*Upload avec imagekit 
+                    <div className="mb-3">
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={handleImageChange}
+                      />
+                    </div>
+                    */}
                   </div>
                 </div>
                 {load ? (
@@ -411,6 +477,7 @@ function Produit() {
                     Ajouter le produit
                   </button>
                 )}
+                <a onClick={() => sendImage()}> envoie img</a>
               </form>
             </div>
 
