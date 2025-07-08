@@ -1,21 +1,27 @@
 "use client";
 import React, { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./css/car.css";
 
 function Carous1() {
   useEffect(() => {
-    const carouselEl = document.querySelector("#carouselExampleAutoplaying"); // ou l’ID de ton carousel
-    if (carouselEl) {
+    const carouselEl = document.querySelector("#carouselExampleAutoplaying");
+    if (carouselEl && typeof window !== "undefined" && window.bootstrap) {
+      // @ts-ignore
       const bootstrapCarousel = new window.bootstrap.Carousel(carouselEl, {
-        interval: 3000, // temps entre les slides
+        interval: 3000,
         ride: "carousel",
       });
+    } else {
+      console.warn("⚠️ window.bootstrap est undefined");
     }
   }, []);
+
   return (
     <div
       id="carouselExampleAutoplaying"
-      className="carousel slide "
+      className="carousel slide"
       data-bs-ride="carousel"
       data-bs-interval="3000"
     >
@@ -24,22 +30,22 @@ function Carous1() {
           <center>
             <span>
               Livraison offerte dès 10.000FCFA d’achat – Ne ratez pas cette
-              offre !
+              offre !
             </span>
           </center>
         </div>
         <div className="carousel-item">
           <center>
             <span>
-              Nouveautés chaque semaine – Découvrez les dernières tendances !
+              Nouveautés chaque semaine – Découvrez les dernières tendances !
             </span>
           </center>
         </div>
         <div className="carousel-item">
           <center>
             <span>
-              Promotions exclusives – Jusqu’à -50% sur une sélection d’articles
-              !
+              Promotions exclusives – Jusqu’à -50% sur une sélection
+              d’articles !
             </span>
           </center>
         </div>

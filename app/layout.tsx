@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.css";
-
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,11 +16,12 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <script
+        <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
           crossOrigin="anonymous"
-        ></script>
+          strategy="beforeInteractive"
+        />
       </head>
       <body>{children}</body>
     </html>

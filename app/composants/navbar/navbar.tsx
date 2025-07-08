@@ -86,7 +86,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
             className="btn d-lg-none m-0"
             type="button"
             data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
+            data-bs-target="#offcanvasScrolling"
           >
             <IoMenuOutline size={27} color="white" />
           </button>
@@ -150,8 +150,11 @@ function Navbar({ onOpenModal }: NavbarProps) {
       {/* Offcanvas navbar */}
       <div
         className="offcanvas offcanvas-end"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
         tabIndex={-1}
-        id="offcanvasNavbar"
+        id="offcanvasScrolling"
+        aria-labelledby="offcanvasScrollingLabel"
       >
         <div className="offcanvas-header border-bottom">
           <h5 className="offcanvas-title">Menu</h5>

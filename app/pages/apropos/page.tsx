@@ -6,6 +6,7 @@ import { Users, Target, Award, Heart, Zap, Shield } from "lucide-react";
 import Carous1 from "@/app/composants/carous1/page";
 import Navbar, { NavbarProps } from "@/app/composants/navbar/navbar";
 import "./css/app.css";
+import Link from "next/link";
 function Apropos() {
   const openModal = () => true;
 
@@ -32,7 +33,6 @@ function Apropos() {
         >
           <h1
             style={{
-              fontSize: "3.5rem",
               fontWeight: "800",
               color: "#1a202c",
               marginBottom: "1.5rem",
@@ -61,9 +61,11 @@ function Apropos() {
               lineHeight: "1.8",
             }}
           >
-            Nous sommes une équipe passionnée dédiée à vous offrir les meilleurs
-            produits technologiques avec un service client exceptionnel. Notre
-            mission est de rendre la technologie accessible à tous.
+            Ivoire-Tech, on vit et respire la tech ! PC dernier cri, smartphones
+            tendance, accessoires high-tech… On sélectionne pour vous le
+            meilleur du numérique à prix juste. Notre équipe est là pour vous
+            conseiller et vous accompagner à chaque étape. Ivoire-Tech, c’est
+            bien plus qu’un e-commerce : c’est votre univers digital !
           </p>
         </div>
 
@@ -232,107 +234,108 @@ function Apropos() {
 
         {/* Mission & Vision Section */}
         <div
+          className=" container-fluid p-4"
           style={{
             maxWidth: "1200px",
-            margin: "0 auto",
-            padding: "4rem 2rem",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
-            gap: "4rem",
           }}
         >
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              padding: "3rem",
-              borderRadius: "20px",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-              border: "1px solid #e2e8f0",
-            }}
-          >
+          <div className="row  justify-content-center">
             <div
+              className="col-lg-4 col-md-5 mt-5 me-lg-5"
               style={{
-                width: "60px",
-                height: "60px",
-                backgroundColor: "#eff6ff",
-                borderRadius: "12px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: "2rem",
+                backgroundColor: "#ffffff",
+                padding: "3rem",
+                borderRadius: "20px",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+                border: "1px solid #e2e8f0",
               }}
             >
-              <Target size={30} color="#4f46e5" />
+              <div
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  backgroundColor: "#eff6ff",
+                  borderRadius: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "2rem",
+                }}
+              >
+                <Target size={30} color="#4f46e5" />
+              </div>
+              <h3
+                style={{
+                  fontSize: "1.75rem",
+                  fontWeight: "700",
+                  color: "#1a202c",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Notre Mission
+              </h3>
+              <p
+                style={{
+                  color: "#64748b",
+                  lineHeight: "1.7",
+                  fontSize: "1.1rem",
+                  margin: 0,
+                }}
+              >
+                Démocratiser l'accès à la technologie en proposant des produits
+                de qualité à des prix compétitifs, tout en offrant un service
+                client exceptionnel et des conseils personnalisés pour chaque
+                client.
+              </p>
             </div>
-            <h3
-              style={{
-                fontSize: "1.75rem",
-                fontWeight: "700",
-                color: "#1a202c",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Notre Mission
-            </h3>
-            <p
-              style={{
-                color: "#64748b",
-                lineHeight: "1.7",
-                fontSize: "1.1rem",
-                margin: 0,
-              }}
-            >
-              Démocratiser l'accès à la technologie en proposant des produits de
-              qualité à des prix compétitifs, tout en offrant un service client
-              exceptionnel et des conseils personnalisés pour chaque client.
-            </p>
-          </div>
 
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              padding: "3rem",
-              borderRadius: "20px",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-              border: "1px solid #e2e8f0",
-            }}
-          >
             <div
+              className="col-lg-4 col-md-5  mt-5 ms-lg-5"
               style={{
-                width: "60px",
-                height: "60px",
-                backgroundColor: "#f0fdf4",
-                borderRadius: "12px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: "2rem",
+                backgroundColor: "#ffffff",
+                padding: "3rem",
+                borderRadius: "20px",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+                border: "1px solid #e2e8f0",
               }}
             >
-              <Zap size={30} color="#22c55e" />
+              <div
+                style={{
+                  width: "60px",
+                  height: "60px",
+                  backgroundColor: "#f0fdf4",
+                  borderRadius: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "2rem",
+                }}
+              >
+                <Zap size={30} color="#22c55e" />
+              </div>
+              <h3
+                style={{
+                  fontSize: "1.75rem",
+                  fontWeight: "700",
+                  color: "#1a202c",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Notre Vision
+              </h3>
+              <p
+                style={{
+                  color: "#64748b",
+                  lineHeight: "1.7",
+                  fontSize: "1.1rem",
+                  margin: 0,
+                }}
+              >
+                Devenir la référence en matière de vente de produits
+                technologiques, en créant une communauté de passionnés et en
+                contribuant à l'innovation technologique accessible à tous.
+              </p>
             </div>
-            <h3
-              style={{
-                fontSize: "1.75rem",
-                fontWeight: "700",
-                color: "#1a202c",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Notre Vision
-            </h3>
-            <p
-              style={{
-                color: "#64748b",
-                lineHeight: "1.7",
-                fontSize: "1.1rem",
-                margin: 0,
-              }}
-            >
-              Devenir la référence en matière de vente de produits
-              technologiques, en créant une communauté de passionnés et en
-              contribuant à l'innovation technologique accessible à tous.
-            </p>
           </div>
         </div>
 
@@ -534,16 +537,15 @@ function Apropos() {
               margin: "0 auto",
             }}
           >
-            <h2
+            <h3
               style={{
-                fontSize: "2.5rem",
                 fontWeight: "700",
                 marginBottom: "1.5rem",
                 margin: "0 0 1.5rem 0",
               }}
             >
               Prêt à découvrir nos produits ?
-            </h2>
+            </h3>
             <p
               style={{
                 fontSize: "1.25rem",
@@ -553,10 +555,18 @@ function Apropos() {
                 margin: "0 0 2.5rem 0",
               }}
             >
-              Explorez notre catalogue et trouvez les produits technologiques
-              qui vous correspondent.
+              Explorez, choisissez, connectez-vous : la technologie qui vous
+              correspond est ici.
             </p>
-            <button id="btn_apropos">Découvrir nos produits</button>
+            <Link
+              style={{
+                textDecoration: "none",
+              }}
+              href={"/pages/tout_produit/"}
+              id="btn_apropos"
+            >
+              Explorer toute notre boutique 
+            </Link>
           </div>
         </div>
       </div>
