@@ -7,6 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
 import styles from "./css/DisplayProduit.module.css";
 import { Store_Panier } from "@/app/store/panier";
+import useSeachStore from "@/app/store/affiche_Seach";
 
 interface Props {
   //  modif: Dispatch<SetStateAction<number>>;
@@ -19,10 +20,13 @@ const DisplayProduit: React.FC<Props> = ({
   showModal,
   onCloseModal,
 }) => {
-  ///les stores
+  ///les store Panier
   const StorePanier = Store_Panier((state) => state.Store_P);
   const AddStore_P = Store_Panier((state) => state.AddStore_P);
   const compteurPanier = Store_Panier((state) => state.increment);
+  // store seach
+  const StoreSeach = useSeachStore((state) => state.seach);
+  const fermerture = useSeachStore((state) => state.ferme);
   // les variables d'états
   const [produits, setProduits] = useState<ProduitType1[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -142,17 +146,18 @@ const DisplayProduit: React.FC<Props> = ({
 
   //console.log("Panier de produit tabPanier ===== ");
   //console.log(tabPanier);
-  // voir detail de produits
 
+  // voir detail de produits
   const handleViewDetails = (voirProd: ProduitType1) => {
     console.log("Voir détails =========", voirProd);
     setDetailProd(voirProd);
   };
-  // console.log("les produits dans Home");
-  // console.log(produits);
   function test() {
     alert("detail clicé");
   }
+  // console.log("les produits dans Home");
+  // console.log(produits);
+
   return (
     <div className="container py-4">
       <ToastContainer />
@@ -334,9 +339,12 @@ const DisplayProduit: React.FC<Props> = ({
       </div>
       {/**fin modal */}
 
-      {/**Modale seach */}
+      {/**Modale seach
+       *
+       * *showModal*
+       */}
 
-      {showModal && (
+      {StoreSeach && (
         <div
           className="modal show fade"
           style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
@@ -344,12 +352,12 @@ const DisplayProduit: React.FC<Props> = ({
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content modern-modal">
-              {/* Bouton de fermeture flottant */}
+              {/* Bouton de fermeture flottant fermerture  onClick={onCloseModal}*/}
               <button
                 id="ferme_rech"
                 type="button"
                 className="btn-close floating-close shadow-none"
-                onClick={onCloseModal}
+                onClick={fermerture}
               >
                 <span>X</span>
               </button>

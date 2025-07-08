@@ -9,6 +9,7 @@ import { IoBagHandleSharp, IoCall, IoMenuOutline } from "react-icons/io5";
 import { IoMdHome } from "react-icons/io";
 import { BsBoxSeam } from "react-icons/bs";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import useSeachStore from "@/app/store/affiche_Seach";
 export interface NavbarProps {
   onOpenModal: () => void;
 }
@@ -18,9 +19,16 @@ function Navbar({ onOpenModal }: NavbarProps) {
   // const [showModal, setShowModal] = useState(false);
 
   const compteur = Store_Panier((state) => state.nbrPanier);
+  //ouverture de seach bar
+  const ouverture = useSeachStore((state) => state.ouvire);
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg" id="navbar">
+      <nav
+        className="navbar navbar-expand-lg"
+        id="navbar"
+        style={{ boxShadow: "0 0 10px rgba(0,0,0,0.1)" }}
+      >
         <div className="container-fluid">
           <a
             className="navbar-brand m-0"
@@ -107,21 +115,21 @@ function Navbar({ onOpenModal }: NavbarProps) {
               </li>
             </ul>
 
-            {/* === Icônes panier et user === */}
+            {/* === Icônes panier et user === ouverture  onClick={onOpenModal}*/}
             <div className="d-flex align-items-center">
               <button
-                onClick={onOpenModal}
+                onClick={ouverture}
                 className="btn btn-link"
                 style={{ color: "white" }}
               >
-                <Search size={28} strokeWidth={2.2} />
+                <Search size={22} strokeWidth={2.2} />
               </button>{" "}
               <Link
                 href={"/composants/panier"}
                 type="button"
                 className="position-relative me-4"
               >
-                <ShoppingCart size={28} color="#fff" strokeWidth={2.2} />
+                <ShoppingCart size={22} color="#fff" strokeWidth={2.2} />
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   {/* {nombre} */}
                   {compteur}
@@ -133,7 +141,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
                 style={{ color: "white" }}
                 className="me-2"
               >
-                <User size={28} color="#fff" />
+                <User size={22} color="#fff" />
               </Link>
             </div>
           </div>
@@ -162,19 +170,19 @@ function Navbar({ onOpenModal }: NavbarProps) {
               </Link>
             </li>
             <li className="nav-item m-1">
-              <Link href={"#"} className="nav-link">
+              <Link href={"/pages/tout_produit/"} className="nav-link">
                 <IoBagHandleSharp size={25} className=" me-2" />
                 Nos produits
               </Link>
             </li>
             <li className="nav-item m-1">
-              <Link href={"#"} className="nav-link">
+              <Link href={"/pages/apropos/"} className="nav-link">
                 <AiOutlineInfoCircle size={25} className=" me-2" /> A propos de
                 nous
               </Link>
             </li>
             <li className="nav-item m-1">
-              <Link href={"#"} className="nav-link">
+              <Link href={"/pages/contact/"} className="nav-link">
                 <IoCall size={25} className=" me-2" /> Contactez nous
               </Link>
             </li>

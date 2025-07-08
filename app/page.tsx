@@ -12,6 +12,7 @@ import AvisClient from "./composants/avis/page";
 //import Navbar, { NavbarProps } from "./composants/navbar/page";
 import Navbar, { NavbarProps } from "./composants/navbar/navbar";
 import DisplayProduit from "./composants/afficheproduit/displayProduit";
+import Nos_produit from "./pages/tout_produit/page";
 export default function Home() {
   // const [nbr, setNbr] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +27,7 @@ export default function Home() {
       <Hero />
       <Categorie_Section />
       <DisplayProduit showModal={showModal} onCloseModal={closeModal} />
-      {/*  <DisplayProduit showModal={showModal} onCloseModal={closeModal} />*/}
+      {/**    <DisplayProduit showModal={showModal} onCloseModal={closeModal} /> */}
       <AvisClient />
     </main>
   );
