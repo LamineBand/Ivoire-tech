@@ -55,7 +55,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
           <div className=" ms-auto  d-lg-none  d-flex align-items-center">
             {/* === Icône Search === */}
             <button
-              onClick={onOpenModal}
+              onClick={ouverture}
               className="btn btn-link"
               style={{ color: "white" }}
             >
@@ -81,7 +81,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
               <User size={20} color="#fff" />
             </Link>
           </div>
-          {/**Boutton de menu sur petit ecran */}
+          {/**Boutton de menu sur petit ecran trois traits */}
           <button
             className="btn d-lg-none m-0"
             type="button"

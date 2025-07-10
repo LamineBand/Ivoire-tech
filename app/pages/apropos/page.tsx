@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 //import Carous1 from "../components/Carous1";
 //import Navbar, { NavbarProps } from "../components/Navbar";
 import { Users, Target, Award, Heart, Zap, Shield } from "lucide-react";
@@ -7,11 +8,120 @@ import Carous1 from "@/app/composants/carous1/page";
 import Navbar, { NavbarProps } from "@/app/composants/navbar/navbar";
 import "./css/app.css";
 import Link from "next/link";
+import axios from "axios";
+import useSeachStore from "@/app/store/affiche_Seach";
+import { toast, ToastContainer } from "react-toastify";
+import { Store_Panier } from "@/app/store/panier";
+import { IoClose } from "react-icons/io5";
 function Apropos() {
+  const [produits, setProduits] = useState<ProduitType1[]>([]);
+  const [search, setSearch] = useState("");
+  const [produitsFiltres, setproduitsFiltres] = useState<ProduitType1[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [DetailProd, setDetailProd] = useState<ProduitType1>();
   const openModal = () => true;
+  // store de seach
+  const StoreSeach = useSeachStore((state) => state.seach);
+  const fermerture = useSeachStore((state) => state.ferme);
+
+  ///les store Panier
+  const StorePanier = Store_Panier((state) => state.Store_P);
+  const AddStore_P = Store_Panier((state) => state.AddStore_P);
+  const compteurPanier = Store_Panier((state) => state.increment);
+  // fonctionnalité de barre de rereche
+  console.log("les lettre de seach == ");
+  console.log(search);
+  useEffect(() => {
+    const produitsFiltres = produits.filter((prod) =>
+      prod.nomProduit.toLowerCase().includes(search.toLowerCase())
+    );
+    setproduitsFiltres(produitsFiltres);
+  }, [search]);
+
+  // recuperation des données dans la base de données au chargement de la page
+  useEffect(() => {
+    const fetchProduits = async () => {
+      try {
+        const res = await axios.get("/api/recupProduits");
+        console.log("Produits récupérés :", res.data.data);
+        setProduits(res.data.data);
+        setLoading(false);
+        // setProduits(res.data) ou autre selon ta logique
+      } catch (error) {
+        console.error("Erreur lors de la récupération :", error);
+      }
+    };
+
+    fetchProduits();
+  }, []);
+  console.log("produit au chargement");
+  console.log(produits);
+
+  // fonction pour fermé seach et ouvrir detail
+  function ferme_ouvre() {
+    document.getElementById("ferme_rech")?.click();
+    setTimeout(() => {
+      // handleViewDetails(prod);
+      document.getElementById("DetailG")?.click();
+      console.log();
+    }, 100);
+  }
+  // Ajout de produit au panier
+  const handleAddToCart = (produit: ProduitType1) => {
+    toast.success("Produit ajouter au panier");
+    console.log("Ajout au panier :", produit);
+    const {
+      _id,
+      nomProduit,
+      prixProduit,
+      categorieProduit,
+      stockProduit,
+      descriptionProduit,
+      imageProduit,
+      vendeur_id,
+    } = produit;
+    const element = {
+      _id,
+      nomProduit,
+      prixProduit,
+      categorieProduit,
+      stockProduit,
+      descriptionProduit,
+      imageProduit,
+      vendeur_id,
+      qte: 1,
+    };
+    //modif((prev) => prev + 1);
+    /**
+        *  settabPanier((prevTab) => {
+          const exist = prevTab.find((item) => item._id === element._id);
+          if (exist) {
+            // Si l’élément existe déjà, on peut augmenter la quantité ou ne rien faire
+            return prevTab.map((item) =>
+              item._id === element._id ? { ...item, qte: item.qte + 1 } : item
+            );
+          } else {
+            // Sinon, on ajoute le nouvel élément
+            return [...prevTab, element];
+          }
+        });
+        */
+    AddStore_P(element);
+    compteurPanier();
+    //localStorage.setItem("panier", JSON.stringify(tabPanier));
+  };
+  console.log("dan storeeee");
+  console.log(StorePanier);
+
+  // voir detail de produits
+  const handleViewDetails = (voirProd: ProduitType1) => {
+    console.log("Voir détails =========", voirProd);
+    setDetailProd(voirProd);
+  };
 
   return (
     <>
+      <ToastContainer />
       <Carous1 />
       <Navbar {...({ onOpenModal: openModal } as NavbarProps)} />
 
@@ -569,7 +679,290 @@ function Apropos() {
             </Link>
           </div>
         </div>
+        {/** modal et contenu de barre de recherche   showModal*/}
+        {StoreSeach && (
+          <div
+            className="modal show fade"
+            style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+            tabIndex={-1}
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content modern-modal">
+                {/* Bouton de fermeture flottant fermerture  onClick={onCloseModal}*/}
+                <button
+                  id="ferme_rech"
+                  type="button"
+                  className="btn-close floating-close shadow-none"
+                  onClick={fermerture}
+                >
+                  <IoClose size={30} />
+                </button>
+
+                {/* Input*/}
+                <div className="modal-body d-flex justify-content-center align-items-center">
+                  <input
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    className="modern-input shadow-none"
+                    placeholder=" Rechercher un produit"
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.75rem",
+                    maxHeight: "300px",
+                    overflowY: "auto",
+                    padding: "0 10px",
+                    scrollbarWidth: "none" /* Firefox */,
+                    msOverflowStyle: "none" /* IE 10+ */,
+                  }}
+                  className="product-list"
+                >
+                  {produitsFiltres.length === 0 ? (
+                    <p
+                      style={{
+                        color: "#888",
+                        fontStyle: "italic",
+                        textAlign: "center",
+                        marginTop: "1rem",
+                        userSelect: "none",
+                      }}
+                    >
+                      Produits introuvables
+                    </p>
+                  ) : (
+                    produitsFiltres.map((item) => (
+                      <div
+                        key={item._id}
+                        style={{
+                          display: "flex",
+                          gap: "12px",
+                          border: "1px solid #ddd",
+                          borderRadius: "12px",
+                          padding: "8px",
+                          alignItems: "center",
+                          background: "#fff",
+                          boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+                        }}
+                      >
+                        <img
+                          src={item.imageProduit}
+                          alt={item.nomProduit}
+                          style={{
+                            width: "70px",
+                            height: "70px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                            flexShrink: 0,
+                          }}
+                        />
+                        <div style={{ flex: 1 }}>
+                          <h5
+                            style={{
+                              margin: 0,
+                              fontSize: "1rem",
+                              fontWeight: 600,
+                            }}
+                          >
+                            {item.nomProduit}
+                          </h5>
+                          <p
+                            style={{
+                              margin: 0,
+                              fontSize: "0.85rem",
+                              color: "#555",
+                            }}
+                          >
+                            {item.prixProduit.toFixed()} FCFA
+                          </p>
+                          <p
+                            style={{
+                              margin: 0,
+                              fontSize: "0.85rem",
+                              color: "#555",
+                            }}
+                          >
+                            {item.stockProduit === 0 ? (
+                              <span
+                                style={{ color: "red", fontWeight: "bold" }}
+                              >
+                                Produit en rupture de stock
+                              </span>
+                            ) : item.stockProduit > 5 ? (
+                              <span
+                                style={{ color: "green", fontWeight: "bold" }}
+                              >
+                                Produit en stock
+                              </span>
+                            ) : (
+                              <span
+                                style={{ color: "orange", fontWeight: "bold" }}
+                              >
+                                {item.stockProduit} Produits restants
+                              </span>
+                            )}
+                          </p>
+                          <div
+                            style={{
+                              display: "flex",
+                              gap: "8px",
+                              marginTop: "4px",
+                            }}
+                          >
+                            <button
+                              style={{
+                                padding: "4px 12px",
+                                border: "none",
+                                borderRadius: "20px",
+                                fontSize: "0.8rem",
+                                cursor: "pointer",
+                                backgroundColor: "#0d6efd",
+                                color: "white",
+                              }}
+                              onClick={() => {
+                                setDetailProd(item); // Met à jour le produit à afficher
+                                fermerture(); // Ferme la modale de recherche
+                                setTimeout(() => {
+                                  if (
+                                    typeof window !== "undefined" &&
+                                    window.bootstrap
+                                  ) {
+                                    const modal = new window.bootstrap.Modal(
+                                      document.getElementById(
+                                        "productDetailsModal"
+                                      )
+                                    );
+                                    modal.show();
+                                  }
+                                }, 200);
+                              }}
+                            >
+                              Détail
+                            </button>
+                            <button
+                              style={{
+                                padding: "4px 12px",
+                                border: "none",
+                                borderRadius: "20px",
+                                fontSize: "0.8rem",
+                                cursor: "pointer",
+                                backgroundColor: "#198754",
+                                color: "white",
+                              }}
+                              onClick={() => handleAddToCart(item)}
+                              disabled={item.stockProduit === 0}
+                            >
+                              Ajouter au panier
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {/**fin modal recherche*/}
       </div>
+
+      {/**Modal de detail */}
+      <div
+        className="modal fade"
+        id="productDetailsModal"
+        tabIndex={-1}
+        aria-labelledby="productDetailsLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-xl modal-dialog-centered">
+          <div className="modal-content">
+            {/* Header */}
+            <div className="modal-header border-bottom-0">
+              <h5 className="modal-title fw-bold" id="productDetailsLabel">
+                Détails du produit
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fermer"
+              ></button>
+            </div>
+
+            {/* Body */}
+            <div className="modal-body">
+              <div className="row g-4">
+                {/* Image */}
+                <div className="col-md-6 text-center">
+                  <img
+                    src={DetailProd?.imageProduit}
+                    alt="Nom du produit"
+                    className="img-fluid rounded shadow-sm"
+                    style={{ maxHeight: "400px", objectFit: "contain" }}
+                  />
+                </div>
+
+                {/* Infos */}
+                <div className="col-md-6">
+                  <h3 className="fw-bold mb-3">{DetailProd?.nomProduit}</h3>
+
+                  <p className="mb-1 text-muted">
+                    <strong>Catégorie :</strong> {DetailProd?.categorieProduit}
+                  </p>
+
+                  <p className="mb-1 text-muted">
+                    <strong>Stock :</strong> {DetailProd?.stockProduit}
+                  </p>
+
+                  <p className="h4 fw-bold text-primary mb-3">
+                    {DetailProd?.prixProduit} FCFA
+                  </p>
+
+                  <p
+                    className="text-secondary mb-4"
+                    style={{ lineHeight: 1.6 }}
+                  >
+                    {DetailProd?.descriptionProduit}
+                  </p>
+
+                  <div>
+                    <span className="badge bg-primary me-2">
+                      #{DetailProd?.categorieProduit}
+                    </span>
+                    {DetailProd?.stockProduit! > 0 ? (
+                      <span className="badge bg-success">En stock</span>
+                    ) : (
+                      <span className="badge bg-danger">Rupture de stock</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="modal-footer border-top-0">
+              <button
+                type="button"
+                className="btn btn-primary me-auto"
+                onClick={() => handleAddToCart(DetailProd!)}
+              >
+                Ajouter au panier
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/**fin modal detail*/}
     </>
   );
 }

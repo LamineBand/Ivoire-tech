@@ -6,7 +6,8 @@ import { Store_Panier } from "@/app/store/panier";
 import axios from "axios";
 import { Eye, ShoppingCart } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { IoClose } from "react-icons/io5";
+import { toast, ToastContainer } from "react-toastify";
 
 function Nos_produit() {
   const [produits, setProduits] = useState<ProduitType1[]>([]);
@@ -126,7 +127,7 @@ function Nos_produit() {
     compteurPanier();
     //localStorage.setItem("panier", JSON.stringify(tabPanier));
   };
-  console.log("dan storeeee");
+  console.log("dans storeeee");
   console.log(StorePanier);
 
   // voir detail de produits
@@ -134,12 +135,12 @@ function Nos_produit() {
     console.log("Voir détails =========", voirProd);
     setDetailProd(voirProd);
   };
-  function test() {
-    alert("detail clicé");
-  }
+  console.log("element de detail ==");
+  console.log(DetailProd);
 
   return (
     <>
+      <ToastContainer />
       <Carous1 />
       <Navbar {...({ onOpenModal: openModal } as NavbarProps)} />
       <center>
@@ -339,7 +340,9 @@ function Nos_produit() {
                 className="btn-close floating-close shadow-none"
                 onClick={fermerture}
               >
-                <span>X</span>
+                <span>
+                  <IoClose size={30} />
+                </span>
               </button>
 
               {/* Input*/}
@@ -464,12 +467,24 @@ function Nos_produit() {
                               color: "white",
                             }}
                             onClick={() => {
-                              ferme_ouvre();
-                              handleViewDetails(item);
-                              //test;
+                              setDetailProd(item); // Met à jour le produit à afficher
+                              fermerture(); // Ferme la modale de recherche
+                              setTimeout(() => {
+                                if (
+                                  typeof window !== "undefined" &&
+                                  window.bootstrap
+                                ) {
+                                  const modal = new window.bootstrap.Modal(
+                                    document.getElementById(
+                                      "productDetailsModal"
+                                    )
+                                  );
+                                  modal.show();
+                                }
+                              }, 200);
                             }}
                           >
-                            Voir détail
+                            Détail
                           </button>
                           <button
                             style={{

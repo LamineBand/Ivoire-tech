@@ -8,7 +8,7 @@ function Carous1() {
   useEffect(() => {
     const carouselEl = document.querySelector("#carouselExampleAutoplaying");
     if (carouselEl && typeof window !== "undefined" && window.bootstrap) {
-      // @ts-ignore
+      // @ts-ignore  data-bs-ride="carousel"
       const bootstrapCarousel = new window.bootstrap.Carousel(carouselEl, {
         interval: 3000,
         ride: "carousel",
@@ -22,7 +22,6 @@ function Carous1() {
     <div
       id="carouselExampleAutoplaying"
       className="carousel slide"
-      data-bs-ride="carousel"
       data-bs-interval="3000"
     >
       <div className="carousel-inner">

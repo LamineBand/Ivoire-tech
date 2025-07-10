@@ -8,6 +8,7 @@ import Link from "next/link";
 import styles from "./css/DisplayProduit.module.css";
 import { Store_Panier } from "@/app/store/panier";
 import useSeachStore from "@/app/store/affiche_Seach";
+import { IoClose } from "react-icons/io5";
 
 interface Props {
   //  modif: Dispatch<SetStateAction<number>>;
@@ -30,7 +31,7 @@ const DisplayProduit: React.FC<Props> = ({
   // les variables d'états
   const [produits, setProduits] = useState<ProduitType1[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [DetailProd, setDetailProd] = useState<ProduitType1>();
+  const [DetailProd, setDetailProd] = useState<ProduitType1 | null>(null);
 
   const [tabPanier, settabPanier] = useState<ProduitType1[]>([]);
   const [search, setSearch] = useState("");
@@ -40,8 +41,8 @@ const DisplayProduit: React.FC<Props> = ({
   console.log("les lettre de seach == ");
   console.log(search);
   useEffect(() => {
-    const produitsFiltres = produits.filter((prod) =>
-      prod.nomProduit.toLowerCase().includes(search.toLowerCase())
+    const produitsFiltres = produits.filter((p) =>
+      p.nomProduit.toLowerCase().includes(search.toLowerCase())
     );
     setproduitsFiltres(produitsFiltres);
   }, [search]);
@@ -49,13 +50,6 @@ const DisplayProduit: React.FC<Props> = ({
   console.log("contenu de tableau filtré ===");
   console.log(produitsFiltres);
 
-  function ferme_ouvre() {
-    document.getElementById("ferme_rech")?.click();
-    setTimeout(() => {
-      // handleViewDetails(prod);
-      document.getElementById("DetailG")?.click();
-    }, 100);
-  }
   // recuperation des données dans la base de données au chargement de la page
   useEffect(() => {
     const fetchProduits = async () => {
@@ -148,13 +142,25 @@ const DisplayProduit: React.FC<Props> = ({
   //console.log(tabPanier);
 
   // voir detail de produits
-  const handleViewDetails = (voirProd: ProduitType1) => {
-    console.log("Voir détails =========", voirProd);
-    setDetailProd(voirProd);
+  const handleViewDetails = (detailproduit: ProduitType1) => {
+    console.log("Voir détails =========", detailproduit);
+    setDetailProd(detailproduit);
   };
-  function test() {
-    alert("detail clicé");
+  console.log("contenu de detail DetailProd ==== ");
+  console.log(DetailProd);
+
+  function ferme_ouvre() {
+    document.getElementById("ferme_rech")?.click();
+    setTimeout(() => {
+      // handleViewDetails(prod);
+      document.getElementById("DetailG")?.click();
+    }, 100);
   }
+  useEffect(() => {
+    console.log(" detail prod a changer ===");
+    console.log(DetailProd);
+  }, [DetailProd]);
+
   // console.log("les produits dans Home");
   // console.log(produits);
 
@@ -164,7 +170,10 @@ const DisplayProduit: React.FC<Props> = ({
 
       <div className="mb-4 d-flex align-items-center">
         <h3>Produits récent </h3>
-        <Link href={"#"} className="ms-auto link-tous-produits">
+        <Link
+          href={"/pages/tout_produit/"}
+          className="ms-auto link-tous-produits"
+        >
           Voir tous les produits →
         </Link>
       </div>
@@ -244,6 +253,8 @@ const DisplayProduit: React.FC<Props> = ({
           )}
         </div>
       )}
+      {/** fin Recherche de produit depuis la base de donnée et affichage */}
+
       {/**Modal de detail */}
       <div
         className="modal fade"
@@ -359,10 +370,12 @@ const DisplayProduit: React.FC<Props> = ({
                 className="btn-close floating-close shadow-none"
                 onClick={fermerture}
               >
-                <span>X</span>
+                <span>
+                  <IoClose size={30} />
+                </span>
               </button>
 
-              {/* Input*/}
+              {/* Input dans seach */}
               <div className="modal-body d-flex justify-content-center align-items-center">
                 <input
                   onChange={(e) => setSearch(e.target.value)}
@@ -371,6 +384,7 @@ const DisplayProduit: React.FC<Props> = ({
                   placeholder=" Rechercher un produit"
                 />
               </div>
+              {/** liste des prosuits filtré selon les mots clé dans seach */}
               <div
                 style={{
                   display: "flex",
@@ -474,6 +488,7 @@ const DisplayProduit: React.FC<Props> = ({
                           }}
                         >
                           <button
+                            type="button"
                             style={{
                               padding: "4px 12px",
                               border: "none",
@@ -484,12 +499,24 @@ const DisplayProduit: React.FC<Props> = ({
                               color: "white",
                             }}
                             onClick={() => {
-                              // ferme_ouvre();
-                              // handleViewDetails(item);
-                              test;
+                              setDetailProd(item); // Met à jour le produit à afficher
+                              fermerture(); // Ferme la modale de recherche
+                              setTimeout(() => {
+                                if (
+                                  typeof window !== "undefined" &&
+                                  window.bootstrap
+                                ) {
+                                  const modal = new window.bootstrap.Modal(
+                                    document.getElementById(
+                                      "productDetailsModal"
+                                    )
+                                  );
+                                  modal.show();
+                                }
+                              }, 200);
                             }}
                           >
-                            Voir détail
+                            Détail
                           </button>
                           <button
                             style={{
@@ -512,10 +539,15 @@ const DisplayProduit: React.FC<Props> = ({
                   ))
                 )}
               </div>
+              {/** fin liste des prosuits filtré selon les mots clé dans seach */}
             </div>
           </div>
         </div>
       )}
+      {/** fin Modale seach
+       *
+  
+       */}
     </div>
   );
 };
