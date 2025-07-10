@@ -236,7 +236,6 @@ export default function Panier() {
                                 height: "100px",
                                 objectFit: "contain",
                                 borderRadius: "10px",
-                                border: "2px solid #f8f9fa",
                               }}
                             />
                           ) : (
@@ -332,36 +331,6 @@ export default function Panier() {
                                 border: "1px solid #e9ecef",
                               }}
                             >
-                              <button
-                                onClick={() => plus(prod._id!)}
-                                className="btn btn-sm"
-                                style={{
-                                  backgroundColor: "transparent",
-                                  border: "none",
-                                  color: "#ff6f00",
-                                  width: "32px",
-                                  height: "32px",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                }}
-                              >
-                                <Plus size={14} />
-                              </button>
-                              <span
-                                style={{
-                                  padding: "6px 12px",
-                                  color: "#0a4580",
-                                  fontWeight: "600",
-                                  minWidth: "35px",
-                                  textAlign: "center",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                }}
-                              >
-                                {prod.qte}
-                              </span>
                               {prod.qte > 1 && (
                                 <button
                                   onClick={() => moins(prod._id!)}
@@ -380,6 +349,37 @@ export default function Panier() {
                                   <Minus size={14} />
                                 </button>
                               )}
+
+                              <span
+                                style={{
+                                  padding: "6px 12px",
+                                  color: "#0a4580",
+                                  fontWeight: "600",
+                                  minWidth: "35px",
+                                  textAlign: "center",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {prod.qte}
+                              </span>
+                              <button
+                                onClick={() => plus(prod._id!)}
+                                className="btn btn-sm"
+                                style={{
+                                  backgroundColor: "transparent",
+                                  border: "none",
+                                  color: "#ff6f00",
+                                  width: "32px",
+                                  height: "32px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                <Plus size={14} />
+                              </button>
                             </div>
                           </div>
 
