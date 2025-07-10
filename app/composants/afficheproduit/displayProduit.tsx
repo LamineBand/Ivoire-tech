@@ -50,15 +50,25 @@ const DisplayProduit: React.FC<Props> = ({
   console.log("contenu de tableau filtré ===");
   console.log(produitsFiltres);
 
-  // recuperation des données dans la base de données au chargement de la page
+  // recuperation des données dans la base de données au chargement de la page les 8 derniers
   useEffect(() => {
     const fetchProduits = async () => {
       try {
         const res = await axios.get("/api/recupProduits");
         console.log("Produits récupérés :", res.data.data);
-        setProduits(res.data.data);
+        const trie = res.data.data;
+        const huit = [];
+
+        for (
+          let index = trie.length - 1;
+          index >= trie.length - 8 && index >= 0;
+          index--
+        ) {
+          huit.push(trie[index]);
+        }
+
+        setProduits(huit.reverse()); // On inverse pour avoir du plus récent au plus ancien
         setLoading(false);
-        // setProduits(res.data) ou autre selon ta logique
       } catch (error) {
         console.error("Erreur lors de la récupération :", error);
       }
