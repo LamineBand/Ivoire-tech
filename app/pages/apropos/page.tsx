@@ -13,6 +13,7 @@ import useSeachStore from "@/app/store/affiche_Seach";
 import { toast, ToastContainer } from "react-toastify";
 import { Store_Panier } from "@/app/store/panier";
 import { IoClose } from "react-icons/io5";
+import Footer from "@/app/composants/footer/footer";
 function Apropos() {
   const [produits, setProduits] = useState<ProduitType1[]>([]);
   const [search, setSearch] = useState("");
@@ -963,6 +964,7 @@ function Apropos() {
         </div>
       </div>
       {/**fin modal detail*/}
+      <Footer />
     </>
   );
 }

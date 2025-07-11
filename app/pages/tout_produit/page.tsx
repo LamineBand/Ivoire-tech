@@ -1,5 +1,6 @@
 "use client";
 import Carous1 from "@/app/composants/carous1/page";
+import Footer from "@/app/composants/footer/footer";
 import Navbar, { NavbarProps } from "@/app/composants/navbar/navbar";
 import useSeachStore from "@/app/store/affiche_Seach";
 import { Store_Panier } from "@/app/store/panier";
@@ -607,6 +608,7 @@ function Nos_produit() {
         </div>
       </div>
       {/**fin modal detail*/}
+      <Footer />
     </>
   );
 }

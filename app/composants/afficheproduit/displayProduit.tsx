@@ -9,6 +9,7 @@ import styles from "./css/DisplayProduit.module.css";
 import { Store_Panier } from "@/app/store/panier";
 import useSeachStore from "@/app/store/affiche_Seach";
 import { IoClose } from "react-icons/io5";
+import { GoArrowRight } from "react-icons/go";
 
 interface Props {
   //  modif: Dispatch<SetStateAction<number>>;
@@ -183,8 +184,13 @@ const DisplayProduit: React.FC<Props> = ({
         <Link
           href={"/pages/tout_produit/"}
           className="ms-auto link-tous-produits"
+          style={{
+            textDecoration: "none",
+            color: "#ff6f00",
+            fontSize: "1.1rem",
+          }}
         >
-          Voir tous les produits →
+          Tous les produits <GoArrowRight />
         </Link>
       </div>
       {/** Recherche de produit depuis la base de donnée et affichage */}
