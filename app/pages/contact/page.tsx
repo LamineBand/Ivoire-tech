@@ -25,6 +25,7 @@ function Contact() {
       <Navbar {...({ onOpenModal: openModal } as NavbarProps)} />
 
       {/* SECTION HERO */}
+
       <section
         className="mt-5"
         style={{
@@ -32,6 +33,7 @@ function Contact() {
           color: "#333",
           padding: "4rem 0",
           textAlign: "center",
+          width: "100%",
         }}
       >
         <h3
@@ -57,7 +59,7 @@ function Contact() {
       </section>
 
       {/* SECTION CONTACT */}
-      <div className="container" style={{ padding: "4rem 0" }}>
+      <div className="container mt-5 mb-5">
         <div className="row">
           {/* FORMULAIRE */}
           <div className="col-md-7 mb-5">
