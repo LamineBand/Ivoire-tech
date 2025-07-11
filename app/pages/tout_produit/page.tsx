@@ -171,7 +171,7 @@ function Nos_produit() {
           >
             Filtrer par catégorie
           </h5>
-
+          {/** les bouttons pour selectionné les catégories de produits  */}
           <div className="d-flex justify-content-center flex-wrap gap-3">
             <button
               className="btn btn-primary"
@@ -340,6 +340,11 @@ function Nos_produit() {
                 type="button"
                 className="btn-close floating-close shadow-none"
                 onClick={fermerture}
+                style={{
+                  backgroundColor: "white",
+                  padding: "0.90rem",
+                  borderRadius: "100%",
+                }}
               >
                 <span>
                   <IoClose size={30} />

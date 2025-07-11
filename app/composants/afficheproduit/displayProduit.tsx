@@ -385,6 +385,11 @@ const DisplayProduit: React.FC<Props> = ({
                 type="button"
                 className="btn-close floating-close shadow-none"
                 onClick={fermerture}
+                style={{
+                  backgroundColor: "white",
+                  padding: "0.90rem",
+                  borderRadius: "100%",
+                }}
               >
                 <span>
                   <IoClose size={30} />

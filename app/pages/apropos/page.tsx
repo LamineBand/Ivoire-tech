@@ -695,6 +695,11 @@ function Apropos() {
                   type="button"
                   className="btn-close floating-close shadow-none"
                   onClick={fermerture}
+                  style={{
+                    backgroundColor: "white",
+                    padding: "0.90rem",
+                    borderRadius: "100%",
+                  }}
                 >
                   <IoClose size={30} />
                 </button>

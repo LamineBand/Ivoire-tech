@@ -90,7 +90,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
           >
             <IoMenuOutline size={27} color="white" />
           </button>
-
+          {/**menu qui s'affiche sur grand  ecran */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -115,7 +115,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
               </li>
             </ul>
 
-            {/* === Icônes panier et user === ouverture  onClick={onOpenModal}*/}
+            {/* === Icônes panier et user === ouverture  onClick={onOpenModal} petit ou grand ecran*/}
             <div className="d-flex align-items-center">
               <button
                 onClick={ouverture}
@@ -155,6 +155,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
         tabIndex={-1}
         id="offcanvasScrolling"
         aria-labelledby="offcanvasScrollingLabel"
+        style={{ maxWidth: "300px" }}
       >
         <div className="offcanvas-header border-bottom">
           <h5 className="offcanvas-title">Menu</h5>
