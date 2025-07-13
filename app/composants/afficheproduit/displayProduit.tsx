@@ -10,6 +10,9 @@ import { Store_Panier } from "@/app/store/panier";
 import useSeachStore from "@/app/store/affiche_Seach";
 import { IoClose } from "react-icons/io5";
 import { GoArrowRight } from "react-icons/go";
+import { FaSearch } from "react-icons/fa";
+import { MdOutlineRemoveRedEye, MdRemoveRedEye } from "react-icons/md";
+import { FiShoppingCart } from "react-icons/fi";
 
 interface Props {
   //  modif: Dispatch<SetStateAction<number>>;
@@ -33,7 +36,7 @@ const DisplayProduit: React.FC<Props> = ({
   const [produits, setProduits] = useState<ProduitType1[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [DetailProd, setDetailProd] = useState<ProduitType1 | null>(null);
-
+  const [mess_seach, setmess_seach] = useState("");
   const [tabPanier, settabPanier] = useState<ProduitType1[]>([]);
   const [search, setSearch] = useState("");
   const [produitsFiltres, setproduitsFiltres] = useState<ProduitType1[]>([]);
@@ -42,10 +45,20 @@ const DisplayProduit: React.FC<Props> = ({
   console.log("les lettre de seach == ");
   console.log(search);
   useEffect(() => {
-    const produitsFiltres = produits.filter((p) =>
-      p.nomProduit.toLowerCase().includes(search.toLowerCase())
-    );
-    setproduitsFiltres(produitsFiltres);
+    setproduitsFiltres([]);
+    setmess_seach("");
+    if (search !== "") {
+      const produitsFiltres = produits.filter((p) =>
+        p.nomProduit.toLowerCase().includes(search.toLowerCase())
+      );
+      if (produitsFiltres.length === 0) {
+        setmess_seach("Produits introuvables");
+      }
+      setproduitsFiltres(produitsFiltres);
+    } else {
+      setmess_seach("");
+      setproduitsFiltres([]);
+    }
   }, [search]);
   /////// fermerture de recherche et ouverture de detail
   console.log("contenu de tableau filtré ===");
@@ -156,6 +169,7 @@ const DisplayProduit: React.FC<Props> = ({
   const handleViewDetails = (detailproduit: ProduitType1) => {
     console.log("Voir détails =========", detailproduit);
     setDetailProd(detailproduit);
+    setproduitsFiltres([]);
   };
   console.log("contenu de detail DetailProd ==== ");
   console.log(DetailProd);
@@ -398,12 +412,17 @@ const DisplayProduit: React.FC<Props> = ({
 
               {/* Input dans seach */}
               <div className="modal-body d-flex justify-content-center align-items-center">
-                <input
-                  onChange={(e) => setSearch(e.target.value)}
-                  type="text"
-                  className="modern-input shadow-none"
-                  placeholder=" Rechercher un produit"
-                />
+                <div className="input-group" style={{ maxWidth: "400px" }}>
+                  <span className="input-group-text bg-white border-end-0">
+                    <FaSearch style={{ color: "#6c757d" }} />
+                  </span>
+                  <input
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    className="form-control shadow-none border-start-0"
+                    placeholder="Rechercher un produit"
+                  />
+                </div>
               </div>
               {/** liste des prosuits filtré selon les mots clé dans seach */}
               <div
@@ -429,7 +448,7 @@ const DisplayProduit: React.FC<Props> = ({
                       userSelect: "none",
                     }}
                   >
-                    Produits introuvables
+                    {mess_seach}
                   </p>
                 ) : (
                   produitsFiltres.map((item) => (
@@ -537,7 +556,7 @@ const DisplayProduit: React.FC<Props> = ({
                               }, 200);
                             }}
                           >
-                            Détail
+                            <MdRemoveRedEye size={15} />
                           </button>
                           <button
                             style={{
@@ -552,7 +571,7 @@ const DisplayProduit: React.FC<Props> = ({
                             onClick={() => handleAddToCart(item)}
                             disabled={item.stockProduit === 0}
                           >
-                            Ajouter au panier
+                            <FiShoppingCart size={15} />
                           </button>
                         </div>
                       </div>

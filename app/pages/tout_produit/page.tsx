@@ -7,7 +7,10 @@ import { Store_Panier } from "@/app/store/panier";
 import axios from "axios";
 import { Eye, ShoppingCart } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { FaSearch } from "react-icons/fa";
+import { FiShoppingCart } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
+import { MdRemoveRedEye } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 
 function Nos_produit() {
@@ -18,6 +21,7 @@ function Nos_produit() {
   const [DetailProd, setDetailProd] = useState<ProduitType1>();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [produit_filtre, setproduit_filtre] = useState<ProduitType1[]>([]);
+  const [mess_seach, setmess_seach] = useState("");
   // store de seach
   const StoreSeach = useSeachStore((state) => state.seach);
   const fermerture = useSeachStore((state) => state.ferme);
@@ -45,10 +49,19 @@ function Nos_produit() {
   console.log("les lettre de seach == ");
   console.log(search);
   useEffect(() => {
-    const produitsFiltres = produits.filter((prod) =>
-      prod.nomProduit.toLowerCase().includes(search.toLowerCase())
-    );
-    setproduitsFiltres(produitsFiltres);
+    setmess_seach("");
+    if (search !== "") {
+      const produitsFiltres = produits.filter((p) =>
+        p.nomProduit.toLowerCase().includes(search.toLowerCase())
+      );
+      if (produitsFiltres.length === 0) {
+        setmess_seach("Produits introuvables");
+      }
+      setproduitsFiltres(produitsFiltres);
+    } else {
+      setmess_seach("");
+      setproduitsFiltres([]);
+    }
   }, [search]);
 
   console.log("dans page produits : ");
@@ -353,12 +366,17 @@ function Nos_produit() {
 
               {/* Input*/}
               <div className="modal-body d-flex justify-content-center align-items-center">
-                <input
-                  onChange={(e) => setSearch(e.target.value)}
-                  type="text"
-                  className="modern-input shadow-none"
-                  placeholder=" Rechercher un produit"
-                />
+                <div className="input-group" style={{ maxWidth: "400px" }}>
+                  <span className="input-group-text bg-white border-end-0">
+                    <FaSearch style={{ color: "#6c757d" }} />
+                  </span>
+                  <input
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    className="form-control shadow-none border-start-0"
+                    placeholder="Rechercher un produit"
+                  />
+                </div>
               </div>
               <div
                 style={{
@@ -383,7 +401,7 @@ function Nos_produit() {
                       userSelect: "none",
                     }}
                   >
-                    Produits introuvables
+                    {mess_seach}
                   </p>
                 ) : (
                   produitsFiltres.map((item) => (
@@ -463,6 +481,7 @@ function Nos_produit() {
                           }}
                         >
                           <button
+                            type="button"
                             style={{
                               padding: "4px 12px",
                               border: "none",
@@ -490,7 +509,7 @@ function Nos_produit() {
                               }, 200);
                             }}
                           >
-                            Détail
+                            <MdRemoveRedEye size={15} />
                           </button>
                           <button
                             style={{
@@ -505,7 +524,7 @@ function Nos_produit() {
                             onClick={() => handleAddToCart(item)}
                             disabled={item.stockProduit === 0}
                           >
-                            Ajouter au panier
+                            <FiShoppingCart size={15} />
                           </button>
                         </div>
                       </div>

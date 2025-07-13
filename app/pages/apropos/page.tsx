@@ -14,12 +14,16 @@ import { toast, ToastContainer } from "react-toastify";
 import { Store_Panier } from "@/app/store/panier";
 import { IoClose } from "react-icons/io5";
 import Footer from "@/app/composants/footer/footer";
+import { FaSearch } from "react-icons/fa";
+import { MdRemoveRedEye } from "react-icons/md";
+import { FiShoppingCart } from "react-icons/fi";
 function Apropos() {
   const [produits, setProduits] = useState<ProduitType1[]>([]);
   const [search, setSearch] = useState("");
   const [produitsFiltres, setproduitsFiltres] = useState<ProduitType1[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [DetailProd, setDetailProd] = useState<ProduitType1>();
+  const [mess_seach, setmess_seach] = useState("");
   const openModal = () => true;
   // store de seach
   const StoreSeach = useSeachStore((state) => state.seach);
@@ -33,10 +37,19 @@ function Apropos() {
   console.log("les lettre de seach == ");
   console.log(search);
   useEffect(() => {
-    const produitsFiltres = produits.filter((prod) =>
-      prod.nomProduit.toLowerCase().includes(search.toLowerCase())
-    );
-    setproduitsFiltres(produitsFiltres);
+    setmess_seach("");
+    if (search !== "") {
+      const produitsFiltres = produits.filter((p) =>
+        p.nomProduit.toLowerCase().includes(search.toLowerCase())
+      );
+      if (produitsFiltres.length === 0) {
+        setmess_seach("Produits introuvables");
+      }
+      setproduitsFiltres(produitsFiltres);
+    } else {
+      setmess_seach("");
+      setproduitsFiltres([]);
+    }
   }, [search]);
 
   // recuperation des données dans la base de données au chargement de la page
@@ -706,12 +719,17 @@ function Apropos() {
 
                 {/* Input*/}
                 <div className="modal-body d-flex justify-content-center align-items-center">
-                  <input
-                    onChange={(e) => setSearch(e.target.value)}
-                    type="text"
-                    className="modern-input shadow-none"
-                    placeholder=" Rechercher un produit"
-                  />
+                  <div className="input-group" style={{ maxWidth: "400px" }}>
+                    <span className="input-group-text bg-white border-end-0">
+                      <FaSearch style={{ color: "#6c757d" }} />
+                    </span>
+                    <input
+                      onChange={(e) => setSearch(e.target.value)}
+                      type="text"
+                      className="form-control shadow-none border-start-0"
+                      placeholder="Rechercher un produit"
+                    />
+                  </div>
                 </div>
                 <div
                   style={{
@@ -736,7 +754,7 @@ function Apropos() {
                         userSelect: "none",
                       }}
                     >
-                      Produits introuvables
+                      {mess_seach}
                     </p>
                   ) : (
                     produitsFiltres.map((item) => (
@@ -818,6 +836,7 @@ function Apropos() {
                             }}
                           >
                             <button
+                              type="button"
                               style={{
                                 padding: "4px 12px",
                                 border: "none",
@@ -845,7 +864,7 @@ function Apropos() {
                                 }, 200);
                               }}
                             >
-                              Détail
+                              <MdRemoveRedEye size={15} />
                             </button>
                             <button
                               style={{
@@ -860,7 +879,7 @@ function Apropos() {
                               onClick={() => handleAddToCart(item)}
                               disabled={item.stockProduit === 0}
                             >
-                              Ajouter au panier
+                              <FiShoppingCart size={15} />
                             </button>
                           </div>
                         </div>
