@@ -74,7 +74,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
               </span>
             </Link>
             <Link
-              href={"/composants/login"}
+              href={"/pages/testlog"}
               style={{ color: "white" }}
               className="ms-4"
             >
@@ -115,7 +115,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
               </li>
             </ul>
 
-            {/* === Icônes panier et user === ouverture  onClick={onOpenModal} petit ou grand ecran*/}
+            {/* === Icônes panier et user === ouverture  onClick={onOpenModal} sur grand ecran*/}
             <div className="d-flex align-items-center">
               <button
                 onClick={ouverture}
@@ -137,7 +137,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
                 </span>
               </Link>
               <Link
-                href={"/composants/login"}
+                href={"/pages/testlog"}
                 style={{ color: "white" }}
                 className="me-2"
               >

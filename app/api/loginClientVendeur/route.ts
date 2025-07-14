@@ -1,5 +1,6 @@
 import Users_Model from "@/app/model/models";
 import { auth } from "@/lib/fireconfig";
+import { GenerateToken } from "@/lib/JWT";
 import { MongoConnect } from "@/lib/mongoConnect";
 import {
   sendEmailVerification,
@@ -26,7 +27,7 @@ export async function POST(req: Request) {
     } else {
       console.log(" C'est un Vendeur");
     }*/
-
+    await GenerateToken(data_user);
     return NextResponse.json({ mess: "ok", data_user });
   } catch (error) {
     console.log("erreur de connexion serveur = ");

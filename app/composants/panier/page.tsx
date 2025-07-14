@@ -488,7 +488,8 @@ export default function Panier() {
                   </div>
 
                   <div className="d-grid gap-2">
-                    <button
+                    <Link
+                      href={"/pages/testpanier"}
                       className="btn btn-lg"
                       style={{
                         backgroundColor: "#ff6f00",
@@ -502,7 +503,7 @@ export default function Panier() {
                       }}
                     >
                       Valider la commande
-                    </button>
+                    </Link>
 
                     <button
                       onClick={Vider}

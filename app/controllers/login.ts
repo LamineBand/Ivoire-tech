@@ -26,7 +26,8 @@ export async function LoginAll(
       localStorage.setItem("user", JSON.stringify(user));
       console.log(user);
       if (user.type === "Client") {
-        console.log("Page Client");
+        //console.log("/pages/dash/client");
+        route.push("/pages/dash/client");
       } else {
         route.push("/pages/dashVendeur");
         console.log("Dashboard Vendeur");

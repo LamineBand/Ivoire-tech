@@ -11,8 +11,13 @@ import {
 import Link from "next/link";
 import React from "react";
 import "./css/dash.css";
+import axios from "axios";
 
 function Sidebar() {
+  const handleLogout = async () => {
+    await axios.post("/api/deconnexion");
+    window.location.href = "/";
+  };
   return (
     <div className="container">
       <div className="row">
@@ -79,6 +84,7 @@ function Sidebar() {
                 id="textsid"
                 className="fw-bold"
                 style={{ color: "#ff6f00" }}
+                onClick={() => handleLogout()}
               >
                 <LogOut size={25} className="me-2" strokeWidth={1.8} />
                 Déconnexion
