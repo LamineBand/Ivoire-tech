@@ -50,6 +50,6 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/pages/testpanier", // matcher pour le panier
-    "/pages/testlog", // matcher pour testlog
+    "/pages/testlog", // matcher pour testlogin
   ],
 };

@@ -10,7 +10,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     await MongoConnect();
-    const { nom, mail, mdp } = await req.json();
+    const { nom, mail, mdp, adresse, ville, tel } = await req.json();
     const user = await createUserWithEmailAndPassword(auth, mail, mdp);
     await sendEmailVerification(user.user);
     /* const client = {
@@ -20,9 +20,17 @@ export async function POST(req: Request) {
     };*/
     const ClientSave = new Users_Model({
       uid: user.user.uid,
+      mail,
       nom: nom,
+      tel,
+      adresse,
+      ville,
+
       type: "Client",
     });
+    console.log("dans client save ===");
+
+    console.log(ClientSave);
 
     await ClientSave.save();
     console.log("user créer avec succès");

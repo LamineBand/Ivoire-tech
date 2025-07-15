@@ -5,6 +5,9 @@ export async function InsClient(
   nom: string,
   mail: string,
   mdp: string,
+  adresse: string,
+  ville: string,
+  tel: string,
   setload: React.Dispatch<React.SetStateAction<boolean>>,
   setmess: React.Dispatch<React.SetStateAction<string>>
 ) {
@@ -15,7 +18,13 @@ export async function InsClient(
       nom,
       mail,
       mdp,
+      adresse,
+      ville,
+      tel,
     };
+    console.log("info dans data ==== ");
+    console.log(data);
+
     const req = await axios.post("/api/clientSingup", data);
     if (req.data && req.data.mess === "ok") {
       setload(false);

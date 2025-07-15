@@ -19,6 +19,10 @@ function InscriptionClient() {
   const [mail, setmail] = useState("");
   const [mdp, setmdp] = useState("");
   const [nom, setnom] = useState("");
+  const [adresse, setAdresse] = useState("");
+  const [ville, setVille] = useState("");
+  const [telephone, setTelephone] = useState("");
+
   const [mess, setmess] = useState("");
   const [load, setload] = useState(false);
 
@@ -35,7 +39,21 @@ function InscriptionClient() {
 
       <div className={styles.loginBox}>
         <h2>Inscription Client</h2>
-        <form onSubmit={(e) => InsClient(e, nom, mail, mdp, setload, setmess)}>
+        <form
+          onSubmit={(e) =>
+            InsClient(
+              e,
+              nom,
+              mail,
+              mdp,
+              adresse,
+              ville,
+              telephone,
+              setload,
+              setmess
+            )
+          }
+        >
           {/* Nom complet */}
           <div style={{ marginBottom: "1rem", position: "relative" }}>
             <AiOutlineUser
@@ -57,6 +75,56 @@ function InscriptionClient() {
               style={{
                 width: "100%",
                 padding: "0.8rem 0.8rem 0.8rem 2.5rem",
+                borderRadius: "8px",
+                border: "1px solid #ccc",
+                outline: "none",
+              }}
+            />
+          </div>
+          {/* Adresse */}
+          <div style={{ marginBottom: "1rem", position: "relative" }}>
+            <input
+              onChange={(e) => setAdresse(e.target.value)}
+              type="text"
+              placeholder="Adresse"
+              required
+              style={{
+                width: "100%",
+                padding: "0.8rem",
+                borderRadius: "8px",
+                border: "1px solid #ccc",
+                outline: "none",
+              }}
+            />
+          </div>
+
+          {/* Ville */}
+          <div style={{ marginBottom: "1rem", position: "relative" }}>
+            <input
+              onChange={(e) => setVille(e.target.value)}
+              type="text"
+              placeholder="Ville"
+              required
+              style={{
+                width: "100%",
+                padding: "0.8rem",
+                borderRadius: "8px",
+                border: "1px solid #ccc",
+                outline: "none",
+              }}
+            />
+          </div>
+
+          {/* Téléphone */}
+          <div style={{ marginBottom: "1rem", position: "relative" }}>
+            <input
+              onChange={(e) => setTelephone(e.target.value)}
+              type="tel"
+              placeholder="Téléphone"
+              required
+              style={{
+                width: "100%",
+                padding: "0.8rem",
                 borderRadius: "8px",
                 border: "1px solid #ccc",
                 outline: "none",
@@ -152,7 +220,7 @@ function InscriptionClient() {
                 fontWeight: "bold",
               }}
             >
-              S'inscire
+              Inscription
             </button>
           ) : (
             <button

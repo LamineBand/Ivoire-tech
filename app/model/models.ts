@@ -7,6 +7,8 @@ const vendeurSchema = new Schema({
   tel: { type: String, unique: true, require: true },
   nomBoutique: { type: String },
   adresse: { type: String },
+  ville: { type: String, required: true },
+  // telephone: { type: String, required: true },
   type: { type: String, require: true },
 });
 

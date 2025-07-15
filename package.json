@@ -18,6 +18,7 @@
     "firebase-admin": "^13.4.0",
     "gsap": "^3.13.0",
     "imagekit-javascript": "^4.0.1",
+    "joose": "^3.50.0",
     "lucide-react": "^0.513.0",
     "middleware": "^1.0.0",
     "mongodb": "^6.17.0",
