@@ -9,11 +9,18 @@ export async function InsClient(
   ville: string,
   tel: string,
   setload: React.Dispatch<React.SetStateAction<boolean>>,
-  setmess: React.Dispatch<React.SetStateAction<string>>
+  setmess: React.Dispatch<React.SetStateAction<string>>,
+  setnom: React.Dispatch<React.SetStateAction<string>>,
+  setmdp: React.Dispatch<React.SetStateAction<string>>,
+  setmail: React.Dispatch<React.SetStateAction<string>>,
+  setVille: React.Dispatch<React.SetStateAction<string>>,
+  setAdresse: React.Dispatch<React.SetStateAction<string>>,
+  setTelephone: React.Dispatch<React.SetStateAction<string>>
 ) {
   e.preventDefault();
   try {
     setload(true);
+    setmess("");
     const data = {
       nom,
       mail,
@@ -27,12 +34,20 @@ export async function InsClient(
 
     const req = await axios.post("/api/clientSingup", data);
     if (req.data && req.data.mess === "ok") {
+      setmess("");
       setload(false);
-      console.log("ok reception de back");
+      setnom("");
+      setmdp("");
+      setmail("");
+      setVille("");
+      setTelephone("");
+      setAdresse("");
+      //  console.log("ok reception de back");
       alert(
         "Votre compte a été créer avec succès Veuillez verifier votre e-mail pour confirmer votre compte "
       );
     } else {
+      setmess(req.data.mess);
       setload(false);
       console.log("back n'a pas reçu");
     }

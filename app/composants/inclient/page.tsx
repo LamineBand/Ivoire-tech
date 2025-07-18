@@ -50,7 +50,13 @@ function InscriptionClient() {
               ville,
               telephone,
               setload,
-              setmess
+              setmess,
+              setnom,
+              setmdp,
+              setmail,
+              setVille,
+              setAdresse,
+              setTelephone
             )
           }
         >
@@ -84,6 +90,7 @@ function InscriptionClient() {
           {/* Adresse */}
           <div style={{ marginBottom: "1rem", position: "relative" }}>
             <input
+              value={adresse}
               onChange={(e) => setAdresse(e.target.value)}
               type="text"
               placeholder="Adresse"
@@ -101,6 +108,7 @@ function InscriptionClient() {
           {/* Ville */}
           <div style={{ marginBottom: "1rem", position: "relative" }}>
             <input
+              value={ville}
               onChange={(e) => setVille(e.target.value)}
               type="text"
               placeholder="Ville"
@@ -118,6 +126,7 @@ function InscriptionClient() {
           {/* Téléphone */}
           <div style={{ marginBottom: "1rem", position: "relative" }}>
             <input
+              value={telephone}
               onChange={(e) => setTelephone(e.target.value)}
               type="tel"
               placeholder="Téléphone"
@@ -246,7 +255,9 @@ function InscriptionClient() {
             </button>
           )}
         </form>
-
+        <div className="mt-3" style={{ color: "red" }}>
+          {mess}
+        </div>
         <div className="mt-3">
           <p>
             Vous avez déjà créé un compte ? <br />
