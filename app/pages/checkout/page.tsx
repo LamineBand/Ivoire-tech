@@ -7,17 +7,22 @@ import { IoMdArrowBack } from "react-icons/io";
 
 function Checkout() {
   interface ClientType {
+    uid: string;
     nom: string;
     tel: string;
     adresse: string;
     ville: string;
   }
+  // recupération des produits du panier dans le store
   const StorePanier = Store_Panier((state) => state.Store_P);
+
+  // recupération des informations du client dans le localstorage
   const [userinfo, setuserinfo] = useState<ClientType>();
   useEffect(() => {
     const info = JSON.parse(localStorage.getItem("user")!);
     setuserinfo(info);
   }, []);
+  // calcul de du total avec reduce
   const total = StorePanier.reduce(
     (acc, prod) => acc + prod.prixProduit * prod.qte,
     0
@@ -38,9 +43,9 @@ function Checkout() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     alert("Commande validée!");
+    // alert("uid client : " + userinfo?.uid);
   };
 
   return (
@@ -58,10 +63,9 @@ function Checkout() {
         </div>
 
         <div className="row">
-          {/* Formulaire */}
+          {/* Formulaire retiré */}
           <div className="col-lg-8">
-            <form onSubmit={handleSubmit}>
-              {/* Contact 
+            {/* Contact 
               <div className="card mb-4">
                 <div className="card-header">
                   <h5>Contact</h5>
@@ -82,20 +86,20 @@ function Checkout() {
                 </div>
               </div>
 */}
-              {/* Adresse */}
-              <div className="card mb-4">
-                <div className="card-header">
-                  <h5>Adresse de livraison</h5>
-                </div>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label className="form-label">Nom :</label>
-                      <br />
-                      <span>
-                        <b> {userinfo?.nom}</b>
-                      </span>
-                      {/**  <input
+            {/* Adresse */}
+            <div className="card mb-4">
+              <div className="card-header">
+                <h5>Adresse de livraison</h5>
+              </div>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label">Nom :</label>
+                    <br />
+                    <span>
+                      <b> {userinfo?.nom}</b>
+                    </span>
+                    {/**  <input
                         type="text"
                         name="firstName"
                         className="form-control"
@@ -103,8 +107,8 @@ function Checkout() {
                         onChange={handleInputChange}
                         required
                       /> */}
-                    </div>
-                    {/**
+                  </div>
+                  {/**
                      *   <div className="col-md-6 mb-3">
                       <label className="form-label">Nom</label>
                       <input
@@ -117,14 +121,14 @@ function Checkout() {
                       />
                     </div>
                      */}
-                  </div>
-                  <div className="mb-3">
-                    <label className="form-label">Adresse :</label>
-                    <br />
-                    <span>
-                      <b>{userinfo?.adresse}</b>
-                    </span>
-                    {/**      <input
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Adresse :</label>
+                  <br />
+                  <span>
+                    <b>{userinfo?.adresse}</b>
+                  </span>
+                  {/**      <input
                       type="text"
                       name="address"
                       className="form-control"
@@ -132,16 +136,16 @@ function Checkout() {
                       onChange={handleInputChange}
                       required
                     /> */}
-                  </div>
-                  <div className="row">
-                    <div className="col-md-8 mb-3">
-                      <label className="form-label">Ville :</label>
-                      <br />
-                      <span>
-                        {" "}
-                        <b>{userinfo?.ville}</b>
-                      </span>
-                      {/**
+                </div>
+                <div className="row">
+                  <div className="col-md-8 mb-3">
+                    <label className="form-label">Ville :</label>
+                    <br />
+                    <span>
+                      {" "}
+                      <b>{userinfo?.ville}</b>
+                    </span>
+                    {/**
                    *     <input
                         type="text"
                         name="city"
@@ -152,16 +156,14 @@ function Checkout() {
                       />
                       
                    */}
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label className="form-label">
-                        Numéro de téléphone :
-                      </label>
-                      <br />
-                      <span>
-                        <b>{userinfo?.tel}</b>
-                      </span>
-                      {/**
+                  </div>
+                  <div className="col-md-4 mb-3">
+                    <label className="form-label">Numéro de téléphone :</label>
+                    <br />
+                    <span>
+                      <b>{userinfo?.tel}</b>
+                    </span>
+                    {/**
                  *       <input
                         type="telephone"
                         name="telephone"
@@ -171,27 +173,26 @@ function Checkout() {
                         required
                       />
                  */}
-                    </div>
                   </div>
                 </div>
               </div>
-              {/**bouton de retour a la page d'accueil */}
-              <Link
-                href="/"
-                className="btn"
-                style={{
-                  backgroundColor: "#f8f9fa", // Gris clair Bootstrap par défaut
-                  color: "#555",
-                  border: "1px solid #ddd",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "0.25rem",
-                  textDecoration: "none",
-                }}
-              >
-                <IoMdArrowBack /> Continuer mes achats
-              </Link>
-              {/* Paiement */}
-            </form>
+            </div>
+            {/**bouton de retour a la page d'accueil */}
+            <Link
+              href="/"
+              className="btn"
+              style={{
+                backgroundColor: "#f8f9fa", // Gris clair Bootstrap par défaut
+                color: "#555",
+                border: "1px solid #ddd",
+                padding: "0.5rem 1rem",
+                borderRadius: "0.25rem",
+                textDecoration: "none",
+              }}
+            >
+              <IoMdArrowBack /> Continuer mes achats
+            </Link>
+            {/* Paiement */}
           </div>
 
           {/* Résumé commande */}
@@ -261,7 +262,7 @@ function Checkout() {
                     fontWeight: "bold",
                     color: "#fff",
                   }}
-                  onClick={() => handleSubmit}
+                  onClick={() => handleSubmit()}
                 >
                   Finaliser la commande
                 </button>

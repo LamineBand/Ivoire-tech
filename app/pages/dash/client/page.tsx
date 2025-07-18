@@ -119,7 +119,7 @@ function DashClient() {
             >
               <div className="card-body p-4">
                 <div className="row align-items-center">
-                  <div className="col-md-8">
+                  <div className="col-md-8 ">
                     <h3 className="fw-bold mb-2" style={{ color: "#2c3e50" }}>
                       {userinfo?.nom}
                     </h3>
@@ -128,7 +128,7 @@ function DashClient() {
                       {clientData.points_fidelite} points de fidélité
                     </p> */}
                   </div>
-                  <div className="col-md-4 text-end  ">
+                  <div className="col-md-4 text-end ">
                     {/** <div className="d-flex justify-content-end align-items-center">
                       <Star className="text-warning me-2" size={24} />
                       <span className="h5 mb-0" style={{ color: "#f39c12" }}>
@@ -136,7 +136,7 @@ function DashClient() {
                       </span>
                     </div> */}
                     <button
-                      className="btn btn-outline-danger btn-sm"
+                      className="btn btn-outline-danger btn-sm "
                       style={{ borderRadius: "20px", padding: "5px 15px" }}
                       onClick={() => handleLogout()}
                     >

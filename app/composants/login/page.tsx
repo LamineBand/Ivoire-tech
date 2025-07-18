@@ -37,7 +37,7 @@ function LogVendeur() {
 
       <div className={styles.loginBox}>
         <h2 className="mb-3">Connexion </h2>
-        <form onSubmit={(e) => LoginAll(e, mail, mdp, setload, route)}>
+        <form onSubmit={(e) => LoginAll(e, mail, mdp, setload, route, setmess)}>
           {/* Champ Email */}
           <div style={{ marginBottom: "1rem", position: "relative" }}>
             <AiOutlineMail
@@ -151,7 +151,9 @@ function LogVendeur() {
             </button>
           )}
         </form>
-
+        <div className="mt-3">
+          <span style={{ color: "red" }}> {mess} </span>
+        </div>
         <div className="mt-3">
           <p>
             Vous n'avez pas de compte ?{" "}
