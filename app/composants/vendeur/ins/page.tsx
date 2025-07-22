@@ -152,7 +152,7 @@ function InscriptionVendeur() {
         </form>
 
         <div className="m-2">
-          <b>{mess}</b>
+          <b style={{ color: "red" }}>{mess}</b>
         </div>
 
         <div className="mt-3">

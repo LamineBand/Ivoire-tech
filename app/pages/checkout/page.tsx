@@ -4,18 +4,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Store_Panier } from "@/app/store/panier";
 import Link from "next/link";
 import { IoMdArrowBack } from "react-icons/io";
+import { ValiderCommande } from "@/app/controllers/client/checkout";
 
 function Checkout() {
-  interface ClientType {
-    uid: string;
-    nom: string;
-    tel: string;
-    adresse: string;
-    ville: string;
-  }
   // recupération des produits du panier dans le store
   const StorePanier = Store_Panier((state) => state.Store_P);
-
+  //vider panier
+  const viderPanier = Store_Panier((state) => state.vider);
+  //création de la variable d'état commande
+  const [commande, setCommande] = useState<CommandeType>({
+    userinfo: {
+      uid: "",
+      nom: "",
+      tel: "",
+      adresse: "",
+      ville: "",
+    },
+    produits: [],
+    total: 0,
+    //adresse: "",
+    statut: "",
+  });
+  //les variables d'état
+  const [load, setload] = useState(true);
+  const [mess, setmess] = useState("");
+  const [videur, setvideur] = useState(false);
+  const [liv, setliv] = useState(0);
   // recupération des informations du client dans le localstorage
   const [userinfo, setuserinfo] = useState<ClientType>();
   useEffect(() => {
@@ -27,7 +41,25 @@ function Checkout() {
     (acc, prod) => acc + prod.prixProduit * prod.qte,
     0
   );
-  const [formData, setFormData] = useState({
+  //test pour vider le panier et mettre livraison a zéro
+  useEffect(() => {
+    if (videur) {
+      console.log("panier doit etre vider");
+      viderPanier();
+      setliv(0);
+    }
+  }, [videur]);
+
+  //tester pour mettre prix de livraison
+  useEffect(() => {
+    if (StorePanier.length === 0) {
+      setliv(0);
+    } else {
+      setliv(2000);
+    }
+  }, [StorePanier]);
+  /**
+ *  const [formData, setFormData] = useState({
     email: "",
     Nom: "",
     lastName: "",
@@ -36,18 +68,49 @@ function Checkout() {
     tel: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+ */
+
+  /**
+ * 
+ *   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
+ */
+  //soummission de la commande au controlleur
+  function genererRefCommande(): string {
+    const date = new Date();
+    const yyyyMMdd = date.toISOString().slice(0, 10).replace(/-/g, ""); // ex: 20250722
+    const random = Math.random().toString(36).substring(2, 8).toUpperCase(); // ex: ABC123
+    return `CMD-${yyyyMMdd}-${random}`;
+  }
   const handleSubmit = () => {
-    alert("Commande validée!");
-    // alert("uid client : " + userinfo?.uid);
-  };
+    if (!userinfo) {
+      console.error("userinfo est undefined");
+      return;
+    }
+    const ref = genererRefCommande();
+    console.log(ref); // CMD-20250722-XYZ789
 
+    const nouvelleCommande = {
+      ref,
+      userinfo,
+      produits: StorePanier,
+      total,
+      statut: "en cours",
+    };
+
+    setCommande(nouvelleCommande); // ← tu peux l’afficher si besoin
+    ValiderCommande(nouvelleCommande, setload, setmess, setvideur); // ← tu envoies la bonne version immédiatement
+  };
+  useEffect(() => {
+    console.log("commande au clic");
+    console.log(commande);
+    //ValiderCommande(commande);
+  }, [commande]);
   return (
     <div
       style={{
@@ -203,31 +266,39 @@ function Checkout() {
               </div>
               <div className="card-body">
                 {/* Produit 1 */}
-                {StorePanier.map((item) => (
-                  <div
-                    className="d-flex align-items-center mb-3"
-                    key={item._id}
-                  >
-                    <img
-                      src={item.imageProduit}
-                      alt={item.nomProduit}
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "cover",
-                        borderRadius: "8px",
-                      }}
-                    />
-                    <div className="ms-3 flex-grow-1">
-                      <h6 className="mb-0">{item.nomProduit}</h6>
-                      <small className="text-muted">Quantité: {item.qte}</small>
-                    </div>
-                    <span className="fw-bold">
-                      {" "}
-                      {item.prixProduit * item.qte} FCFA{" "}
-                    </span>
+                {StorePanier.length === 0 ? (
+                  <div className="text-center text-muted py-4">
+                    <i className="bi bi-cart-x fs-1 mb-2"></i>
+                    <p className="mb-0">Votre panier est vide.</p>
                   </div>
-                ))}
+                ) : (
+                  StorePanier.map((item) => (
+                    <div
+                      className="d-flex align-items-center mb-3"
+                      key={item._id}
+                    >
+                      <img
+                        src={item.imageProduit}
+                        alt={item.nomProduit}
+                        style={{
+                          width: "60px",
+                          height: "60px",
+                          objectFit: "cover",
+                          borderRadius: "8px",
+                        }}
+                      />
+                      <div className="ms-3 flex-grow-1">
+                        <h6 className="mb-0">{item.nomProduit}</h6>
+                        <small className="text-muted">
+                          Quantité: {item.qte}
+                        </small>
+                      </div>
+                      <span className="fw-bold">
+                        {item.prixProduit * item.qte} FCFA
+                      </span>
+                    </div>
+                  ))
+                )}
 
                 <hr />
 
@@ -238,7 +309,7 @@ function Checkout() {
                 </div>
                 <div className="d-flex justify-content-between mb-2">
                   <span>Livraison</span>
-                  <span>2 000 FCFA</span>
+                  <span>{liv} FCFA</span>
                 </div>
                 <div className="d-flex justify-content-between mb-3">
                   <span>TVA</span>
@@ -249,29 +320,51 @@ function Checkout() {
                   <span className="fw-bold fs-5">Total</span>
                   <span className="fw-bold fs-5 text-primary">
                     {" "}
-                    {total + 2000} FCFA
+                    {total + liv} FCFA
                   </span>
                 </div>
-
-                <button
-                  type="submit"
-                  className="btn  w-100"
-                  style={{
-                    padding: "12px",
-                    backgroundColor: "#ff6f00",
-                    fontWeight: "bold",
-                    color: "#fff",
-                  }}
-                  onClick={() => handleSubmit()}
-                >
-                  Finaliser la commande
-                </button>
+                {load ? (
+                  <button
+                    type="submit"
+                    className="btn  w-100"
+                    style={{
+                      padding: "12px",
+                      backgroundColor: "#ff6f00",
+                      fontWeight: "bold",
+                      color: "#fff",
+                    }}
+                    onClick={() => handleSubmit()}
+                  >
+                    Valider la commande
+                  </button>
+                ) : (
+                  <button
+                    className="btn  w-100"
+                    type="button"
+                    disabled
+                    style={{
+                      padding: "12px",
+                      backgroundColor: "#ff6f00",
+                      fontWeight: "bold",
+                      color: "#fff",
+                    }}
+                  >
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      aria-hidden="true"
+                    ></span>
+                    <span role="status">
+                      {" "}
+                      Validation de commande en cours...
+                    </span>
+                  </button>
+                )}
 
                 <p
-                  className="text-center text-muted mt-3"
-                  style={{ fontSize: "0.8rem" }}
+                  className="text-center  mt-3"
+                  style={{ fontSize: "0.9rem", color: "red" }}
                 >
-                  Paiement sécurisé SSL
+                  {mess}
                 </p>
               </div>
             </div>

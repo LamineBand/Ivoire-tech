@@ -53,6 +53,7 @@ export async function InsClient(
     }
   } catch (error) {
     setload(false);
+    setmess("L'inscription a échouer");
     console.log("erreur d'inscription = ");
     console.log(error);
   }

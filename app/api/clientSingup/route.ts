@@ -44,7 +44,8 @@ export async function POST(req: Request) {
     } else if (error.code === "auth/weak-password") {
       return NextResponse.json({ mess: "Mot de passe trop court ou invalide" });
     }
-    if (error.code === 11000) {
+    /**
+    *  if (error.code === 11000) {
       const keyValue = error.keyValue || error.errorResponse?.keyValue || {};
 
       const duplicatedField = Object.keys(keyValue)[0] || "champ inconnu";
@@ -58,6 +59,7 @@ export async function POST(req: Request) {
         { status: 409 }
       );
     }
+    */
     return NextResponse.json({ mess: "Inscription client à echouer" });
   }
 }

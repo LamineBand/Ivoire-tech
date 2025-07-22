@@ -13,7 +13,7 @@ export async function SaveVendeur(
   setload: React.Dispatch<React.SetStateAction<boolean>>,
   resetForm: () => void
 ) {
-  // e.preventDefault();
+  e.preventDefault();
   try {
     setmess("");
     setload(true);
@@ -34,7 +34,7 @@ export async function SaveVendeur(
       if (req.data.mess !== "ok") {
         setmess(req.data.mess);
       } else {
-        setmess("Compte vendeur créer avec succès");
+        setmess("");
         alert(
           "Votre compte a bien été créer veuillez consulter votre boite mail pour confimer votre compte"
         );

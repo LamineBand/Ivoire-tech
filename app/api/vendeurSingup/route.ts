@@ -47,7 +47,31 @@ export async function POST(req: Request) {
       console.log("sauvegarde mongo ok");
     }
     return NextResponse.json({ mess: "ok" });
-  } catch (error) {
+  } catch (error: any) {
+    //gestion des erreurs
+    console.log("erreur inscription client =");
+    console.log(error);
+    if (error.code === "auth/email-already-in-use") {
+      return NextResponse.json({ mess: "Cet e-mail a déjà été utiliser" });
+    } else if (error.code === "auth/weak-password") {
+      return NextResponse.json({ mess: "Mot de passe trop court ou invalide" });
+    }
+    /**
+    *  if (error.code === 11000) {
+      const keyValue = error.keyValue || error.errorResponse?.keyValue || {};
+
+      const duplicatedField = Object.keys(keyValue)[0] || "champ inconnu";
+
+      return NextResponse.json(
+        {
+          mess: `Le champ '${duplicatedField}' est déjà utilisé.`,
+          error: "mongo-duplicate",
+          field: duplicatedField,
+        },
+        { status: 409 }
+      );
+    }
+    */
     console.log("erreur serveur = ");
     console.log(error);
     return NextResponse.json({ mess: "Echec d'incription" });
