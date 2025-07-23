@@ -119,6 +119,127 @@ function Checkout() {
         padding: "20px",
       }}
     >
+      {/**btn modal succès */}
+      <button
+        id="suc"
+        type="button"
+        className="btn btn-primary d-none"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModalSuccès"
+      >
+        succès
+      </button>
+      {/**Modal succès */}
+      <div
+        className="modal fade"
+        id="exampleModalSuccès"
+        tabIndex={-1}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              {/**  <h1 className="modal-title fs-5" id="exampleModalLabel">
+                Modal title
+              </h1>
+                 <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              */}
+            </div>
+            <div className="modal-body">
+              <center>
+                <img
+                  src="/img/rsuc.png"
+                  style={{ width: "300px", height: "300px", display: "block" }}
+                  alt="succès"
+                />
+                <h4 className="mt-3" style={{ color: "#008000" }}>
+                  {" "}
+                  Vôtre commande a été valider avec succès
+                </h4>
+              </center>
+            </div>
+            <div className="modal-footer">
+              {/**<button type="button" className="btn btn-primary">
+                Save changes
+              </button> */}
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/**btn echec */}
+      <button
+        id="echec"
+        type="button"
+        className="btn btn-primary d-none"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        echec
+      </button>
+      {/**Modal echec */}
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex={-1}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              {/**<h1 className="modal-title fs-5" id="exampleModalLabel">
+                Modal title
+              </h1>
+                <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              */}
+            </div>
+            <div className="modal-body">
+              <center>
+                <img
+                  src="/img/echec.jpg"
+                  style={{ width: "300px", height: "300px", display: "block" }}
+                  alt="echec"
+                />
+                <h4 className="mt-3" style={{ color: "#FF0000" }}>
+                  {" "}
+                  Impossible de valider une commande Vide
+                </h4>
+              </center>
+            </div>
+            <div className="modal-footer">
+              {/** <button type="button" className="btn btn-primary">
+                Save changes
+              </button> */}
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container">
         <div className="text-center mb-4">
           <h1 style={{ color: "#343a40" }}>Ivoire-tech</h1>

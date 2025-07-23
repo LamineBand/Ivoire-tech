@@ -23,8 +23,9 @@ export async function ValiderCommande(
       if (req && req.data.mess === "ok") {
         setload(true);
         console.log("reçu au back");
+        document.getElementById("suc")?.click();
         setvideur(true);
-        alert("Commande Valider");
+        //  alert("Commande Valider");
       } else {
         setload(true);
         console.log("erreur dans le back");
@@ -32,7 +33,8 @@ export async function ValiderCommande(
       }
     } else {
       setload(true);
-      alert("Vous ne pouvez pas valider un panier vide");
+      document.getElementById("echec")?.click();
+      // alert("Vous ne pouvez pas valider un panier vide");
     }
   } catch (error) {
     setload(true);
