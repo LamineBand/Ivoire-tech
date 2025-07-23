@@ -17,6 +17,7 @@ interface ClientType {
   ville: string;
 }
 interface CommandeType {
+  ref: string;
   userinfo: ClientType;
   produits: ProduitType1[];
   total: number;

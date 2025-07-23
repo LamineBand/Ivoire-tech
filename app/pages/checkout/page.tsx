@@ -13,6 +13,7 @@ function Checkout() {
   const viderPanier = Store_Panier((state) => state.vider);
   //création de la variable d'état commande
   const [commande, setCommande] = useState<CommandeType>({
+    ref: "",
     userinfo: {
       uid: "",
       nom: "",

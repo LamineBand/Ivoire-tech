@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { CiLogout } from "react-icons/ci";
 import {
   ShoppingBag,
@@ -10,7 +10,6 @@ import {
   Clock,
   CheckCircle,
   XCircle,
-  Heart,
 } from "lucide-react";
 import Carous1 from "@/app/composants/carous1/page";
 import Navbar, { NavbarProps } from "@/app/composants/navbar/navbar";
@@ -26,7 +25,11 @@ function DashClient() {
     uid: string;
     ville: string;
   }
+  //les variables d'état
   const [userinfo, setuserinfo] = useState<UserInfoType>();
+  //const [data, setdata] = useState<CommandeType>();
+  const [cmd, setcmd] = useState<CommandeType[]>([]);
+  const [total, settotal] = useState(0);
   const openModal = () => true;
   //recupération d'info de user dans localstorage
   useEffect(() => {
@@ -71,6 +74,53 @@ function DashClient() {
     ],
   };
 
+  // recupérations des infos dans la base de données
+  async function recup() {
+    try {
+      const response = await axios.get("/api/recupcmd/");
+
+      if (response?.data?.mess === "ok") {
+        const commandes = response.data.cmd;
+
+        const userStr = localStorage.getItem("user");
+        if (!userStr) {
+          console.warn("Aucun utilisateur trouvé dans le localStorage.");
+          return;
+        }
+
+        const user = JSON.parse(userStr);
+        const uid_user = user.uid;
+
+        const commandesUser = commandes.filter(
+          (cmd: any) => cmd.userinfo?.uid === uid_user
+        );
+
+        console.log("Commandes de l'utilisateur :", commandesUser);
+        setcmd(commandesUser);
+        //return commandesUser;
+      } else {
+        console.log("Aucune donnée reçue ou message différent de 'ok'.");
+      }
+    } catch (error) {
+      console.error(
+        "Une erreur est survenue pendant la récupération des données :",
+        error
+      );
+    }
+  }
+
+  useEffect(() => {
+    recup();
+  }, []);
+
+  useEffect(() => {
+    console.log("contenu de cmd=");
+    console.log(cmd);
+    const total = cmd.reduce((total, p) => total + p.total, 0);
+    console.log("prix total");
+    console.log(total);
+    settotal(total);
+  }, [cmd]);
   const getStatusBadge = (statut: string) => {
     switch (statut) {
       case "Livrée":
@@ -128,7 +178,7 @@ function DashClient() {
                       {clientData.points_fidelite} points de fidélité
                     </p> */}
                   </div>
-                  <div className="col-md-4 text-end ">
+                  <div className="col-md-4 text-start ">
                     {/** <div className="d-flex justify-content-end align-items-center">
                       <Star className="text-warning me-2" size={24} />
                       <span className="h5 mb-0" style={{ color: "#f39c12" }}>
@@ -170,7 +220,7 @@ function DashClient() {
                   <ShoppingBag size={24} />
                 </div>
                 <h3 className="fw-bold mb-1" style={{ color: "#2c3e50" }}>
-                  {clientData.total_commandes}
+                  {cmd.length}
                 </h3>
                 <p className="text-muted mb-0">Commandes totales</p>
               </div>
@@ -196,14 +246,16 @@ function DashClient() {
                   <CreditCard size={24} />
                 </div>
                 <h3 className="fw-bold mb-1" style={{ color: "#2c3e50" }}>
-                  {clientData.montant_total.toLocaleString("fr-FR")}€
+                  {total.toLocaleString("fr-FR")}CFA
                 </h3>
                 <p className="text-muted mb-0">Total dépensé</p>
               </div>
             </div>
           </div>
 
-          <div className="col-md-4 mb-3">
+          {/**
+           * 
+           * <div className="col-md-4 mb-3">
             <div
               className="card border-0 shadow-sm h-100"
               style={{ borderRadius: "12px" }}
@@ -222,15 +274,14 @@ function DashClient() {
                   <TrendingUp size={24} />
                 </div>
                 <h3 className="fw-bold mb-1" style={{ color: "#2c3e50" }}>
-                  {(
-                    clientData.montant_total / clientData.total_commandes
-                  ).toFixed(0)}
-                  €
+                  {cmd.length > 0 ? (total / cmd.length).toFixed(0) : 0}
+                  FCFA
                 </h3>
                 <p className="text-muted mb-0">Panier moyen</p>
               </div>
             </div>
           </div>
+           */}
         </div>
 
         {/* Commandes récentes */}
@@ -284,18 +335,18 @@ function DashClient() {
                       </tr>
                     </thead>
                     <tbody>
-                      {clientData.commandes_recentes.map((commande, index) => (
+                      {cmd.map((commande, index) => (
                         <tr key={index} style={{ transition: "all 0.2s ease" }}>
                           <td className="ps-4 py-3">
                             <span
                               className="fw-semibold"
                               style={{ color: "#2c3e50" }}
                             >
-                              {commande.id}
+                              {commande.ref}
                             </span>
                           </td>
                           <td className="py-3">
-                            <span className="text-muted">{commande.date}</span>
+                            <span className="text-muted">date</span>
                           </td>
                           <td className="py-3">
                             <div>
@@ -304,7 +355,7 @@ function DashClient() {
                                   key={idx}
                                   className="d-block text-muted small"
                                 >
-                                  {produit}
+                                  {produit.nomProduit}
                                 </span>
                               ))}
                             </div>
@@ -314,7 +365,7 @@ function DashClient() {
                               className="fw-semibold"
                               style={{ color: "#27ae60" }}
                             >
-                              {commande.montant.toLocaleString("fr-FR")}€
+                              {commande.total.toLocaleString("fr-FR")}FCFA
                             </span>
                           </td>
                           <td className="py-3">
