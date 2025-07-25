@@ -14,6 +14,7 @@ function Checkout() {
   //création de la variable d'état commande
   const [commande, setCommande] = useState<CommandeType>({
     ref: "",
+    date: "",
     userinfo: {
       uid: "",
       nom: "",
@@ -81,13 +82,15 @@ function Checkout() {
   };
 
  */
-  //soummission de la commande au controlleur
+
+  //cette fonction génère une ref commande
   function genererRefCommande(): string {
     const date = new Date();
     const yyyyMMdd = date.toISOString().slice(0, 10).replace(/-/g, ""); // ex: 20250722
     const random = Math.random().toString(36).substring(2, 8).toUpperCase(); // ex: ABC123
     return `CMD-${yyyyMMdd}-${random}`;
   }
+  //soummission de la commande au controlleur
   const handleSubmit = () => {
     if (!userinfo) {
       console.error("userinfo est undefined");
@@ -95,9 +98,11 @@ function Checkout() {
     }
     const ref = genererRefCommande();
     console.log(ref); // CMD-20250722-XYZ789
-
+    const aujourdHui = new Date();
+    const dateFormatee = aujourdHui.toLocaleDateString("fr-FR");
     const nouvelleCommande = {
       ref,
+      date: dateFormatee,
       userinfo,
       produits: StorePanier,
       total,

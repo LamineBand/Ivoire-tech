@@ -432,7 +432,7 @@ function Produit() {
                       onChange={uploadImage}
                     />
 
-                    <img src={imageProduit} alt="" />
+                    <img src={imageProduit || "pas img"} alt="img" />
 
                     {/*Upload avec imagekit 
                     <div className="mb-3">

@@ -18,6 +18,7 @@ interface ClientType {
 }
 interface CommandeType {
   ref: string;
+  date: string;
   userinfo: ClientType;
   produits: ProduitType1[];
   total: number;

@@ -6,16 +6,56 @@ import "./css/dash.css";
 import Navdash from "../dash/vendeur/navbar/navbarVendeur";
 import Sidebar from "../dash/vendeur/sidbar/page";
 import { VendeurType } from "@/type/type";
+import axios from "axios";
 
 export default function VendeurDashboard() {
   const [user, setuser] = useState<VendeurType>();
+  const [cmdbrut, setcmdbrut] = useState<CommandeType[]>([]);
+  const [cmd, setcmd] = useState<CommandeType[]>([]);
   const boutique = user?.nomBoutique;
+  //fonction de recupération des commandes
+  async function getcmd() {
+    try {
+      const req = await axios.get("/api/recupcmd/");
+      if (req && req.data) {
+        console.log("les cmd  =");
+        console.log(req.data);
+        setcmdbrut(req.data);
+      }
+    } catch (error) {
+      console.log("erreur de récupération des commandes ");
+      console.log(error);
+    }
+  }
+  //recupération des infos du vendeur dans localstorage et déclanchement de la fonction de recupération des commandes au  back
   useEffect(() => {
     const req = JSON.parse(localStorage.getItem("user")!) || [];
     console.log("info dans dash = ");
     setuser(req);
     console.log(req);
+    getcmd();
   }, []);
+  //fonction de trie de commande selon le vendeur au chargement des commandes
+  function trie() {
+    let filtre: CommandeType[] = [];
+
+    if (Array.isArray(cmdbrut)) {
+      for (let index = 0; index < cmdbrut.length; index++) {
+        for (let i = 0; i < cmdbrut[index].produits.length; i++) {
+          if (cmdbrut[index].produits[i].vendeur_id === user?.uid) {
+            filtre.push(cmdbrut[index]);
+          }
+        }
+      }
+      console.log("commandes concernant ce vendeur :", filtre);
+    } else {
+      //  console.warn("cmdbrut n'est pas un tableau :", cmdbrut);
+    }
+  }
+  useEffect(() => {
+    trie();
+  }, [cmdbrut, user]);
+
   return (
     <div className="container-fluid">
       {/* Header */}
@@ -35,8 +75,8 @@ export default function VendeurDashboard() {
             <div className="col-md-3">
               <div className="card shadow-sm text-center">
                 <div className="card-body">
-                  <h5 className="card-title">Ventes du jour</h5>
-                  <p className="fs-4 fw-bold">25</p>
+                  <h5 className="card-title">Ventes </h5>
+                  <p className="fs-4 fw-bold">5</p>
                 </div>
               </div>
             </div>
@@ -48,7 +88,8 @@ export default function VendeurDashboard() {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            {/**
+          *    <div className="col-md-3">
               <div className="card shadow-sm text-center">
                 <div className="card-body">
                   <h5 className="card-title">Produits en stock</h5>
@@ -56,6 +97,7 @@ export default function VendeurDashboard() {
                 </div>
               </div>
             </div>
+          */}
             <div className="col-md-3">
               <div className="card shadow-sm text-center">
                 <div className="card-body">

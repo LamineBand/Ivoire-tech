@@ -30,6 +30,12 @@ function DashClient() {
   //const [data, setdata] = useState<CommandeType>();
   const [cmd, setcmd] = useState<CommandeType[]>([]);
   const [total, settotal] = useState(0);
+  const [toutcmd, settoutcmd] = useState(true);
+  const [show, setShow] = useState(false);
+  const [cmdDetail, setcmdDetail] = useState<CommandeType>();
+
+  const opendetail = () => setShow(true);
+  const closedetail = () => setShow(false);
   const openModal = () => true;
   //recupération d'info de user dans localstorage
   useEffect(() => {
@@ -113,6 +119,7 @@ function DashClient() {
     recup();
   }, []);
 
+  // calcule de prix total de chaque commande
   useEffect(() => {
     console.log("contenu de cmd=");
     console.log(cmd);
@@ -121,6 +128,7 @@ function DashClient() {
     console.log(total);
     settotal(total);
   }, [cmd]);
+
   const getStatusBadge = (statut: string) => {
     switch (statut) {
       case "Livrée":
@@ -155,7 +163,125 @@ function DashClient() {
     <>
       <Carous1 />
       <Navbar {...({ onOpenModal: openModal } as NavbarProps)} />
+      {/* Bouton d'ouverture 
+        <button className="btn btn-primary" onClick={opendetail}>
+                Voir Détails Commande
+              </button>
+      */}
 
+      {/* Modal */}
+      <center>
+        {" "}
+        {show && (
+          <div
+            className="modal fade show"
+            tabIndex={-1}
+            role="dialog"
+            style={{
+              display: "block",
+              backgroundColor: "rgba(0,0,0,0.5)",
+            }}
+          >
+            <div
+              className="modal-dialog modal-dialog-centered modal-lg"
+              role="document"
+              style={{
+                margin: "1rem",
+              }}
+            >
+              <div
+                className="modal-content shadow-sm"
+                style={{
+                  borderRadius: "12px",
+                  fontSize: "16px",
+                }}
+              >
+                {/* Header */}
+                <div
+                  className="modal-header bg-primary text-white"
+                  style={{
+                    borderBottom: "none",
+                  }}
+                >
+                  <h5 className="modal-title">Détails de la commande</h5>
+                  <button
+                    type="button"
+                    className="btn-close btn-close-white"
+                    onClick={closedetail}
+                  ></button>
+                </div>
+
+                {/* Body */}
+                <div className="modal-body">
+                  <div className="mb-3 text-start">
+                    <p>
+                      <strong>Référence :</strong> {cmdDetail?.ref}
+                    </p>
+                    <p>
+                      <strong>Date :</strong> {cmdDetail?.date}
+                    </p>
+                    <p>
+                      <strong>Client :</strong> {cmdDetail?.userinfo.nom}
+                    </p>
+                    <p>
+                      <strong>Statut :</strong>{" "}
+                      <span className="badge bg-success">
+                        {cmdDetail?.statut}
+                      </span>
+                    </p>
+                  </div>
+
+                  {/* Table */}
+                  <div className="table-responsive">
+                    <table className="table table-bordered align-middle">
+                      <thead className="table-light">
+                        <tr>
+                          <th>Produit</th>
+                          <th>Prix Unitaire</th>
+                          <th>Quantité</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cmdDetail?.produits.map((item, index) => (
+                          <tr key={index}>
+                            <td>{item.nomProduit}</td>
+                            <td>{item.prixProduit} FCFA</td>
+                            <td>{item.qte}</td>
+                            <td>{item.prixProduit * item.qte}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colSpan={3} className="text-end">
+                            <strong>Total Commande</strong>
+                          </td>
+                          <td>
+                            <strong>{cmdDetail?.total}</strong>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div
+                  className="modal-footer"
+                  style={{
+                    borderTop: "none",
+                  }}
+                >
+                  <button className="btn btn-secondary" onClick={closedetail}>
+                    Fermer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </center>
       <div className="container" style={{ marginTop: "7rem" }}>
         {/* En-tête de bienvenue */}
         <div className="row mb-4">
@@ -286,129 +412,385 @@ function DashClient() {
 
         {/* Commandes récentes */}
         <div className="row mb-5">
-          <div className="col-12">
-            <div
-              className="card border-0 shadow-sm"
-              style={{ borderRadius: "12px" }}
-            >
-              <div className="card-header bg-transparent border-0 p-4">
-                <h4 className="fw-bold mb-0" style={{ color: "#2c3e50" }}>
-                  Commandes récentes
-                </h4>
-              </div>
-              <div className="card-body p-0">
-                <div className="table-responsive">
-                  <table className="table table-hover mb-0">
-                    <thead style={{ backgroundColor: "#f8f9fa" }}>
-                      <tr>
-                        <th
-                          className="border-0 fw-semibold ps-4"
-                          style={{ color: "#6c757d" }}
-                        >
-                          Commande
-                        </th>
-                        <th
-                          className="border-0 fw-semibold"
-                          style={{ color: "#6c757d" }}
-                        >
-                          Date
-                        </th>
-                        <th
-                          className="border-0 fw-semibold"
-                          style={{ color: "#6c757d" }}
-                        >
-                          Produits
-                        </th>
-                        <th
-                          className="border-0 fw-semibold"
-                          style={{ color: "#6c757d" }}
-                        >
-                          Montant
-                        </th>
-                        <th
-                          className="border-0 fw-semibold"
-                          style={{ color: "#6c757d" }}
-                        >
-                          Statut
-                        </th>
-                        <th className="border-0"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cmd.map((commande, index) => (
-                        <tr key={index} style={{ transition: "all 0.2s ease" }}>
-                          <td className="ps-4 py-3">
-                            <span
-                              className="fw-semibold"
-                              style={{ color: "#2c3e50" }}
-                            >
-                              {commande.ref}
-                            </span>
-                          </td>
-                          <td className="py-3">
-                            <span className="text-muted">date</span>
-                          </td>
-                          <td className="py-3">
-                            <div>
-                              {commande.produits.map((produit, idx) => (
-                                <span
-                                  key={idx}
-                                  className="d-block text-muted small"
-                                >
-                                  {produit.nomProduit}
-                                </span>
-                              ))}
-                            </div>
-                          </td>
-                          <td className="py-3">
-                            <span
-                              className="fw-semibold"
-                              style={{ color: "#27ae60" }}
-                            >
-                              {commande.total.toLocaleString("fr-FR")}FCFA
-                            </span>
-                          </td>
-                          <td className="py-3">
-                            <span
-                              className={`badge bg-${getStatusBadge(
-                                commande.statut
-                              )} d-inline-flex align-items-center`}
-                            >
-                              {getStatusIcon(commande.statut)}
-                              <span className="ms-2">{commande.statut}</span>
-                            </span>
-                          </td>
-                          <td className="py-3">
-                            <button
-                              className="btn btn-outline-primary btn-sm"
-                              style={{ borderRadius: "8px" }}
-                            >
-                              Voir détails
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+          {toutcmd ? (
+            <div className="col-12">
+              <div
+                className="card border-0 shadow-sm"
+                style={{ borderRadius: "12px" }}
+              >
+                <div className="card-header bg-transparent border-0 p-4">
+                  <h4 className="fw-bold mb-0" style={{ color: "#2c3e50" }}>
+                    Commandes récentes
+                  </h4>
                 </div>
-              </div>
-              <div className="card-footer bg-transparent border-0 p-4">
-                <div className="text-center">
-                  <button
-                    className="btn btn-primary"
-                    style={{
-                      borderRadius: "25px",
-                      padding: "10px 30px",
-                      background: "linear-gradient(135deg, #3498db, #2980b9)",
-                      border: "none",
-                    }}
-                  >
-                    Voir toutes les commandes
-                  </button>
+                <div className="card-body p-0">
+                  <div className="table-responsive">
+                    <table className="table table-hover mb-0">
+                      <thead style={{ backgroundColor: "#f8f9fa" }}>
+                        <tr>
+                          <th
+                            className="border-0 fw-semibold ps-4"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Commande
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Date
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Produits
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Montant
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Statut
+                          </th>
+                          <th className="border-0"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cmd.slice(-4).map((commande, index) => (
+                          <tr
+                            key={index}
+                            style={{ transition: "all 0.2s ease" }}
+                          >
+                            <td className="ps-4 py-3">
+                              <span
+                                className="fw-semibold"
+                                style={{ color: "#2c3e50" }}
+                              >
+                                {commande.ref}
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              <span className="text-muted">
+                                {commande.date}
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              <div>
+                                {commande.produits
+                                  .slice(0, 1)
+                                  .map((produit, idx) => (
+                                    <span
+                                      key={idx}
+                                      className="d-block text-muted small"
+                                    >
+                                      {produit.nomProduit}
+                                    </span>
+                                  ))}
+                                {commande.produits.length > 2 && (
+                                  <span className="text-muted small">
+                                    +{commande.produits.length - 2} autres
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3">
+                              <span
+                                className="fw-semibold"
+                                style={{ color: "#27ae60" }}
+                              >
+                                {commande.total.toLocaleString("fr-FR")}FCFA
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              {/*getStatusIcon(commande.statut)*/}
+                              <span
+                                className={`badge d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill
+    ${
+      commande.statut === "En cours"
+        ? "bg-warning text-dark"
+        : commande.statut === "Validé"
+        ? "bg-success"
+        : commande.statut === "Annulée"
+        ? "bg-danger"
+        : commande.statut === "Expédiée"
+        ? "bg-primary"
+        : "bg-secondary"
+    }`}
+                              >
+                                {commande.statut === "En cours" && (
+                                  <>
+                                    <Clock size={16} />
+                                    <span>En cours</span>
+                                  </>
+                                )}
+
+                                {commande.statut === "Validé" && (
+                                  <>
+                                    <CheckCircle size={16} />
+                                    <span>Validé</span>
+                                  </>
+                                )}
+
+                                {commande.statut === "Annulée" && (
+                                  <>
+                                    <XCircle size={16} />
+                                    <span>Annulée</span>
+                                  </>
+                                )}
+
+                                {commande.statut === "Expédiée" && (
+                                  <>
+                                    <Package size={16} />
+                                    <span>Expédiée</span>
+                                  </>
+                                )}
+
+                                {/* Si aucun statut connu */}
+                                {[
+                                  "En cours",
+                                  "Validé",
+                                  "Annulée",
+                                  "Expédiée",
+                                ].indexOf(commande.statut) === -1 && (
+                                  <>
+                                    <Package size={16} />
+                                    <span>{commande.statut}</span>
+                                  </>
+                                )}
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              <button
+                                className="btn btn-outline-primary btn-sm"
+                                style={{ borderRadius: "8px" }}
+                                onClick={() => {
+                                  setcmdDetail(commande);
+                                  opendetail();
+                                }}
+                              >
+                                Voir détails
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className="card-footer bg-transparent border-0 p-4">
+                  <div className="text-center">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => settoutcmd(false)}
+                      style={{
+                        borderRadius: "25px",
+                        padding: "10px 30px",
+                        background: "linear-gradient(135deg, #3498db, #2980b9)",
+                        border: "none",
+                      }}
+                    >
+                      Voir toutes les commandes
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="col-12">
+              <div
+                className="card border-0 shadow-sm"
+                style={{ borderRadius: "12px" }}
+              >
+                <div className="card-header bg-transparent border-0 p-4">
+                  <h4 className="fw-bold mb-0" style={{ color: "#2c3e50" }}>
+                    Toutes les commandes
+                  </h4>
+                </div>
+                <div className="card-body p-0">
+                  <div className="table-responsive">
+                    <table className="table table-hover mb-0">
+                      <thead style={{ backgroundColor: "#f8f9fa" }}>
+                        <tr>
+                          <th
+                            className="border-0 fw-semibold ps-4"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Commande
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Date
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Produits
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Montant
+                          </th>
+                          <th
+                            className="border-0 fw-semibold"
+                            style={{ color: "#6c757d" }}
+                          >
+                            Statut
+                          </th>
+                          <th className="border-0"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cmd.map((commande, index) => (
+                          <tr
+                            key={index}
+                            style={{ transition: "all 0.2s ease" }}
+                          >
+                            <td className="ps-4 py-3">
+                              <span
+                                className="fw-semibold"
+                                style={{ color: "#2c3e50" }}
+                              >
+                                {commande.ref}
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              <span className="text-muted">
+                                {" "}
+                                {commande.date}
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              <div>
+                                {commande.produits
+                                  .slice(0, 1)
+                                  .map((produit, idx) => (
+                                    <span
+                                      key={idx}
+                                      className="d-block text-muted small"
+                                    >
+                                      {produit.nomProduit}
+                                    </span>
+                                  ))}
+                                {commande.produits.length > 2 && (
+                                  <span className="text-muted small">
+                                    +{commande.produits.length - 2} autres
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3">
+                              <span
+                                className="fw-semibold"
+                                style={{ color: "#27ae60" }}
+                              >
+                                {commande.total.toLocaleString("fr-FR")}FCFA
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              <span
+                                className={`badge d-inline-flex align-items-center gap-1 px-2 py-1 rounded-pill
+    ${
+      commande.statut === "En cours"
+        ? "bg-warning text-dark"
+        : commande.statut === "Validé"
+        ? "bg-success"
+        : commande.statut === "Annulée"
+        ? "bg-danger"
+        : commande.statut === "Expédiée"
+        ? "bg-primary"
+        : "bg-secondary"
+    }`}
+                              >
+                                {commande.statut === "En cours" && (
+                                  <>
+                                    <Clock size={16} />
+                                    <span>En cours</span>
+                                  </>
+                                )}
+
+                                {commande.statut === "Validé" && (
+                                  <>
+                                    <CheckCircle size={16} />
+                                    <span>Validé</span>
+                                  </>
+                                )}
+
+                                {commande.statut === "Annulée" && (
+                                  <>
+                                    <XCircle size={16} />
+                                    <span>Annulée</span>
+                                  </>
+                                )}
+
+                                {commande.statut === "Expédiée" && (
+                                  <>
+                                    <Package size={16} />
+                                    <span>Expédiée</span>
+                                  </>
+                                )}
+
+                                {/* Si aucun statut connu */}
+                                {[
+                                  "En cours",
+                                  "Validé",
+                                  "Annulée",
+                                  "Expédiée",
+                                ].indexOf(commande.statut) === -1 && (
+                                  <>
+                                    <Package size={16} />
+                                    <span>{commande.statut}</span>
+                                  </>
+                                )}
+                              </span>
+                            </td>
+                            <td className="py-3">
+                              <button
+                                className="btn btn-outline-primary btn-sm"
+                                style={{ borderRadius: "8px" }}
+                                onClick={() => {
+                                  setcmdDetail(commande);
+                                  opendetail();
+                                }}
+                              >
+                                Voir détails
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className="card-footer bg-transparent border-0 p-4">
+                  <div className="text-center">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => settoutcmd(true)}
+                      style={{
+                        borderRadius: "25px",
+                        padding: "10px 30px",
+                        background: "linear-gradient(135deg, #3498db, #2980b9)",
+                        border: "none",
+                      }}
+                    >
+                      Voir moins de commandes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Actions rapides 

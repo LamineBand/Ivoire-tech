@@ -54,7 +54,8 @@ export const Store_Panier = create<storeType>()(
       supp: (id: string) =>
         set((state) => ({
           Store_P: state.Store_P.filter((item) => item._id !== id),
-          nbrPanier: state.nbrPanier - 1,
+          // nbrPanier: state.nbrPanier - 1,
+          nbrPanier: state.Store_P.filter((item) => item._id !== id).length,
         })),
     }),
     {
