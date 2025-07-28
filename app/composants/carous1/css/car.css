@@ -1,10 +1,43 @@
+/*
 #carouselExampleAutoplaying {
   background-color: #ff6f00;
   color: #ffffff;
   width: 100%;
   margin: 0;
   position: fixed;
-  top: 0; /* Ajouté */
-  left: 0; /* Ajouté */
-  z-index: 1000; /* Pour être au-dessus des autres éléments */
+  top: 0; Ajouté 
+  left: 0;  Ajouté 
+  z-index: 1000;  Pour être au-dessus des autres éléments 
+}
+
+*/
+
+.ticker-wrapper {
+  overflow: hidden;
+  width: 100%;
+  background-color: #ff6f00;
+  color: #ffffff;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+}
+
+.ticker {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: tickerScroll 30s linear infinite;
+}
+
+.ticker-item {
+  color: #ffffff;
+}
+
+/* Animation 100% fluide et continue */
+@keyframes tickerScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
