@@ -155,7 +155,7 @@ function Navbar({ onOpenModal }: NavbarProps) {
         tabIndex={-1}
         id="offcanvasScrolling"
         aria-labelledby="offcanvasScrollingLabel"
-        style={{ maxWidth: "300px" }}
+        style={{ maxWidth: "250px" }}
       >
         <div className="offcanvas-header border-bottom">
           <h5 className="offcanvas-title">Menu</h5>
@@ -169,25 +169,39 @@ function Navbar({ onOpenModal }: NavbarProps) {
         <div className="offcanvas-body">
           <ul className="navbar-nav mb-4">
             <li className="nav-item m-1">
-              <Link href={"/"} className="nav-link">
-                <IoMdHome size={25} /> Accueil
+              <Link
+                href={"/"}
+                className="nav-link d-flex align-items-center fs-5"
+              >
+                <IoMdHome size={26} className="me-2" />
+                Accueil
               </Link>
             </li>
             <li className="nav-item m-1">
-              <Link href={"/pages/tout_produit/"} className="nav-link">
-                <IoBagHandleSharp size={25} className=" me-2" />
+              <Link
+                href={"/pages/tout_produit/"}
+                className="nav-link d-flex align-items-center fs-5"
+              >
+                <IoBagHandleSharp size={25} className="me-2" />
                 Nos produits
               </Link>
             </li>
             <li className="nav-item m-1">
-              <Link href={"/pages/apropos/"} className="nav-link">
-                <AiOutlineInfoCircle size={25} className=" me-2" /> A propos de
+              <Link
+                href={"/pages/apropos/"}
+                className="nav-link d-flex align-items-center fs-5"
+              >
+                <AiOutlineInfoCircle size={25} className="me-2" />A propos de
                 nous
               </Link>
             </li>
             <li className="nav-item m-1">
-              <Link href={"/pages/contact/"} className="nav-link">
-                <IoCall size={25} className=" me-2" /> Contactez nous
+              <Link
+                href={"/pages/contact/"}
+                className="nav-link d-flex align-items-center fs-5"
+              >
+                <IoCall size={25} className="me-2" />
+                Contactez nous
               </Link>
             </li>
           </ul>
