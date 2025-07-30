@@ -23,6 +23,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { IoClose } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
+import { Sendmess } from "@/app/controllers/client/contacter_nous";
 
 function Contact() {
   const [produits, setProduits] = useState<ProduitType1[]>([]);
@@ -31,6 +32,12 @@ function Contact() {
   const [loading, setLoading] = useState<boolean>(true);
   const [DetailProd, setDetailProd] = useState<ProduitType1>();
   const [mess_seach, setmess_seach] = useState("");
+  //les states du formulaire messages
+  const [nom, setnom] = useState("");
+  const [mail, setmail] = useState("");
+  const [message, setmessage] = useState("");
+  const [load, setload] = useState(true);
+
   // store de seach
   const StoreSeach = useSeachStore((state) => state.seach);
   const fermerture = useSeachStore((state) => state.ferme);
@@ -124,6 +131,7 @@ function Contact() {
   };
   console.log("dan storeeee");
   console.log(StorePanier);
+
   return (
     <>
       <Carous1 />
@@ -187,7 +195,20 @@ function Contact() {
                 Envoyez-nous un message
               </h3>
 
-              <form>
+              <form
+                onSubmit={(e) =>
+                  Sendmess(
+                    e,
+                    nom,
+                    mail,
+                    message,
+                    setload,
+                    setnom,
+                    setmail,
+                    setmessage
+                  )
+                }
+              >
                 {/* NOM */}
                 <div className="mb-3 position-relative">
                   <label htmlFor="name" className="form-label">
@@ -203,10 +224,13 @@ function Contact() {
                     }}
                   />
                   <input
+                    value={nom}
+                    onChange={(e) => setnom(e.target.value)}
+                    required
                     type="text"
                     className="form-control ps-5 shadow-none"
                     id="name"
-                    placeholder="Votre nom"
+                    placeholder="Votre nom et prénom"
                     style={{ borderRadius: "8px" }}
                   />
                 </div>
@@ -226,6 +250,9 @@ function Contact() {
                     }}
                   />
                   <input
+                    required
+                    value={mail}
+                    onChange={(e) => setmail(e.target.value)}
                     type="email"
                     className="form-control ps-5 shadow-none"
                     id="email"
@@ -240,6 +267,9 @@ function Contact() {
                     Message
                   </label>
                   <textarea
+                    required
+                    value={message}
+                    onChange={(e) => setmessage(e.target.value)}
                     className="form-control shadow-none"
                     id="message"
                     rows={5}
@@ -247,19 +277,37 @@ function Contact() {
                     style={{ borderRadius: "8px" }}
                   ></textarea>
                 </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  style={{
-                    padding: "0.75rem 2rem",
-                    fontWeight: "bold",
-                    borderRadius: "8px",
-                  }}
-                >
-                  Envoyer
-                  <IoIosSend className="ms-2" size={20} />
-                </button>
+                {load ? (
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    style={{
+                      padding: "0.75rem 2rem",
+                      fontWeight: "bold",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    Envoyer
+                    <IoIosSend className="ms-2" size={20} />
+                  </button>
+                ) : (
+                  <button
+                    style={{
+                      padding: "0.75rem 2rem",
+                      fontWeight: "bold",
+                      borderRadius: "8px",
+                    }}
+                    className="btn btn-primary"
+                    type="button"
+                    disabled
+                  >
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      aria-hidden="true"
+                    ></span>
+                    <span role="status"> Envoie de message en cours...</span>
+                  </button>
+                )}
               </form>
             </div>
           </div>
