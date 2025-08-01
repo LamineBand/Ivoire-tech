@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 import { FaStore } from "react-icons/fa";
 import { RiShoppingBag4Line } from "react-icons/ri";
@@ -200,7 +201,15 @@ function Footer() {
                     margin: "0",
                   }}
                 >
-                  Conçu par Bandaogo Lamine
+                  <Link
+                    className=" text-white"
+                    href={"https://lamine-portfolio.vercel.app/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    Conçu par Bandaogo Lamine
+                  </Link>
                 </p>
               </div>
             </div>
