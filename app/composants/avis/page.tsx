@@ -52,38 +52,40 @@ const avis = [
 
 function AvisClient() {
   return (
-    <div className="container mb-5">
-      <h4 className="ms-4">Avis clients</h4>
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={20}
-        slidesPerView={1}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-      >
-        {avis.map((item) => (
-          <SwiperSlide key={item.id}>
-            <div className="testimonial-card">
-              <div className="testimonial-header">
-                <img src={item.img} alt={item.nom} className="avatar" />
-                <div className="testimonial-info">
-                  <h3>{item.nom}</h3>
-                  <div className="stars">{item.stars}</div>
+    <div data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+      <div className="container mb-5">
+        <h4 className="ms-4">Avis clients</h4>
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
+          {avis.map((item) => (
+            <SwiperSlide key={item.id}>
+              <div className="testimonial-card">
+                <div className="testimonial-header">
+                  <img src={item.img} alt={item.nom} className="avatar" />
+                  <div className="testimonial-info">
+                    <h3>{item.nom}</h3>
+                    <div className="stars">{item.stars}</div>
+                  </div>
                 </div>
+                <p className="testimonial-message">“{item.message}”</p>
               </div>
-              <p className="testimonial-message">“{item.message}”</p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </div>
   );
 }

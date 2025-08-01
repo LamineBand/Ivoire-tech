@@ -155,46 +155,49 @@ function Apropos() {
             textAlign: "center",
           }}
         >
-          <h1
-            style={{
-              fontWeight: "800",
-              color: "#1a202c",
-              marginBottom: "1.5rem",
-              letterSpacing: "-0.025em",
-            }}
-          >
-            À propos de nous
-          </h1>
+          <div data-aos="flip-left">
+            <h1
+              style={{
+                fontWeight: "800",
+                color: "#1a202c",
+                marginBottom: "1.5rem",
+                letterSpacing: "-0.025em",
+              }}
+            >
+              À propos de nous
+            </h1>
+            <div
+              style={{
+                width: "100px",
+                height: "4px",
+                backgroundColor: "#4f46e5",
+                margin: "0 auto 2rem auto",
+                borderRadius: "2px",
+              }}
+            ></div>
 
-          <div
-            style={{
-              width: "100px",
-              height: "4px",
-              backgroundColor: "#4f46e5",
-              margin: "0 auto 2rem auto",
-              borderRadius: "2px",
-            }}
-          ></div>
-
-          <p
-            style={{
-              fontSize: "1.25rem",
-              color: "#64748b",
-              maxWidth: "800px",
-              margin: "0 auto",
-              lineHeight: "1.8",
-            }}
-          >
-            Ivoire-Tech, on vit et respire la tech ! PC dernier cri, smartphones
-            tendance, accessoires high-tech… On sélectionne pour vous le
-            meilleur du numérique à prix juste. Notre équipe est là pour vous
-            conseiller et vous accompagner à chaque étape. Ivoire-Tech, c’est
-            bien plus qu’un e-commerce : c’est votre univers digital !
-          </p>
+            <p
+              style={{
+                fontSize: "1.25rem",
+                color: "#64748b",
+                maxWidth: "800px",
+                margin: "0 auto",
+                lineHeight: "1.8",
+              }}
+            >
+              Ivoire-Tech, on vit et respire la tech ! PC dernier cri,
+              smartphones tendance, accessoires high-tech… On sélectionne pour
+              vous le meilleur du numérique à prix juste. Notre équipe est là
+              pour vous conseiller et vous accompagner à chaque étape.
+              Ivoire-Tech, c’est bien plus qu’un e-commerce : c’est votre
+              univers digital !
+            </p>
+          </div>
         </div>
 
         {/* debuts des sections  */}
         <div
+          data-aos="fade-down"
           style={{
             backgroundColor: "#ffffff",
             padding: "4rem 2rem",
@@ -365,6 +368,7 @@ function Apropos() {
         >
           <div className="row  justify-content-center">
             <div
+              data-aos="fade-right"
               className="col-lg-4 col-md-5 mt-5 me-lg-5"
               style={{
                 backgroundColor: "#ffffff",
@@ -414,6 +418,7 @@ function Apropos() {
             </div>
 
             <div
+              data-aos="fade-left"
               className="col-lg-4 col-md-5  mt-5 ms-lg-5"
               style={{
                 backgroundColor: "#ffffff",
@@ -510,6 +515,7 @@ function Apropos() {
             }}
           >
             <div
+              data-aos="fade-right"
               style={{
                 textAlign: "center",
                 padding: "2rem",
@@ -555,6 +561,7 @@ function Apropos() {
             </div>
 
             <div
+              data-aos="fade-up"
               style={{
                 textAlign: "center",
                 padding: "2rem",
@@ -600,6 +607,7 @@ function Apropos() {
             </div>
 
             <div
+              data-aos="fade-left"
               style={{
                 textAlign: "center",
                 padding: "2rem",

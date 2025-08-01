@@ -221,60 +221,64 @@ const DisplayProduit: React.FC<Props> = ({
           ) : (
             produits?.map((prod) => (
               <div key={prod._id} className="col-sm-6 col-md-4 col-lg-3">
-                <div className="card h-100 shadow-sm border-0">
-                  <img
-                    src={
-                      prod.imageProduit ||
-                      "https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
-                    }
-                    className="card-img-top"
-                    alt={prod.nomProduit}
-                    style={{
-                      height: "180px",
-                      objectFit: "cover",
-                      borderTopLeftRadius: "0.5rem",
-                      borderTopRightRadius: "0.5rem",
-                    }}
-                  />
-                  <div className="card-body d-flex flex-column">
-                    <h5 className="card-title fw-bold">{prod.nomProduit}</h5>
+                <div data-aos="fade-up" data-aos-duration="3000">
+                  <div className="card h-100 shadow-sm border-0">
+                    <img
+                      src={
+                        prod.imageProduit ||
+                        "https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+                      }
+                      className="card-img-top"
+                      alt={prod.nomProduit}
+                      style={{
+                        height: "180px",
+                        objectFit: "cover",
+                        borderTopLeftRadius: "0.5rem",
+                        borderTopRightRadius: "0.5rem",
+                      }}
+                    />
+                    <div className="card-body d-flex flex-column">
+                      <h5 className="card-title fw-bold">{prod.nomProduit}</h5>
 
-                    <p className="mb-1">
-                      {prod.stockProduit === 0 ? (
-                        <span style={{ color: "red" }}>
-                          Produit en rupture de stock
-                        </span>
-                      ) : prod.stockProduit > 5 ? (
-                        <span style={{ color: "green" }}>Produit en stock</span>
-                      ) : (
-                        <span style={{ color: "red" }}>
-                          {prod.stockProduit} Produits restants
-                        </span>
-                      )}
-                    </p>
+                      <p className="mb-1">
+                        {prod.stockProduit === 0 ? (
+                          <span style={{ color: "red" }}>
+                            Produit en rupture de stock
+                          </span>
+                        ) : prod.stockProduit > 5 ? (
+                          <span style={{ color: "green" }}>
+                            Produit en stock
+                          </span>
+                        ) : (
+                          <span style={{ color: "red" }}>
+                            {prod.stockProduit} Produits restants
+                          </span>
+                        )}
+                      </p>
 
-                    <p className="fw-bold mb-2 fs-5">
-                      {prod.prixProduit.toLocaleString()} FCFA
-                    </p>
+                      <p className="fw-bold mb-2 fs-5">
+                        {prod.prixProduit.toLocaleString()} FCFA
+                      </p>
 
-                    <div className="d-flex justify-content-between mt-auto">
-                      <button
-                        className="btn btn-sm btn-primary d-flex align-items-center"
-                        onClick={() => handleAddToCart(prod)}
-                      >
-                        <ShoppingCart size={16} className="me-1" />
-                        Ajouter
-                      </button>
-                      <button
-                        id="DetailG"
-                        data-bs-toggle="modal"
-                        data-bs-target="#productDetailsModal"
-                        className="btn btn-sm btn-outline-secondary d-flex align-items-center"
-                        onClick={() => handleViewDetails(prod)}
-                      >
-                        <Eye size={16} className="me-1" />
-                        Détails
-                      </button>
+                      <div className="d-flex justify-content-between mt-auto">
+                        <button
+                          className="btn btn-sm btn-primary d-flex align-items-center"
+                          onClick={() => handleAddToCart(prod)}
+                        >
+                          <ShoppingCart size={16} className="me-1" />
+                          Ajouter
+                        </button>
+                        <button
+                          id="DetailG"
+                          data-bs-toggle="modal"
+                          data-bs-target="#productDetailsModal"
+                          className="btn btn-sm btn-outline-secondary d-flex align-items-center"
+                          onClick={() => handleViewDetails(prod)}
+                        >
+                          <Eye size={16} className="me-1" />
+                          Détails
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

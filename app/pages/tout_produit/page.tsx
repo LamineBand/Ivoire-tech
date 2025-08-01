@@ -158,99 +158,106 @@ function Nos_produit() {
       <Carous1 />
       <Navbar {...({ onOpenModal: openModal } as NavbarProps)} />
       <center>
-        <div
-          style={{
-            marginTop: "7rem",
-            maxWidth: "600px",
-            width: "90%",
-            padding: "2rem",
-            background: "linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%)",
-            borderRadius: "16px",
-            boxShadow: "0 12px 30px rgba(0,0,0,0.08)",
-            marginLeft: "auto",
-            marginRight: "auto",
-            border: "1px solid #eee",
-          }}
-        >
-          <h5
-            className="mb-4"
+        <div data-aos="flip-left">
+          <div
             style={{
-              fontWeight: "700",
-              textAlign: "center",
-              color: "#222",
-              fontSize: "1.5rem",
-              letterSpacing: "0.5px",
+              marginTop: "7rem",
+              maxWidth: "600px",
+              width: "90%",
+              padding: "2rem",
+              background: "linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%)",
+              borderRadius: "16px",
+              boxShadow: "0 12px 30px rgba(0,0,0,0.08)",
+              marginLeft: "auto",
+              marginRight: "auto",
+              border: "1px solid #eee",
             }}
           >
-            Filtrer par catégorie
-          </h5>
-          {/** les bouttons pour selectionné les catégories de produits  */}
-          <div className="d-flex justify-content-center flex-wrap gap-3">
-            <button
-              className="btn btn-primary"
+            <h5
+              className="mb-4"
               style={{
-                minWidth: "120px",
-                borderRadius: "50px",
-                fontWeight: "500",
-                transition: "all 0.3s ease",
+                fontWeight: "700",
+                textAlign: "center",
+                color: "#222",
+                fontSize: "1.5rem",
+                letterSpacing: "0.5px",
               }}
-              onClick={() => setSelectedCategory("smartwatch")}
             >
-              Smartwatch
-            </button>
-            <button
-              className="btn btn-primary"
-              style={{
-                minWidth: "120px",
-                borderRadius: "50px",
-                fontWeight: "500",
-                transition: "all 0.3s ease",
-              }}
-              onClick={() => setSelectedCategory("smartphone")}
-            >
-              Smartphone
-            </button>
-            <button
-              className="btn btn-primary"
-              style={{
-                minWidth: "120px",
-                borderRadius: "50px",
-                fontWeight: "500",
-                transition: "all 0.3s ease",
-              }}
-              onClick={() => setSelectedCategory("ordinateurs")}
-            >
-              Ordinateurs
-            </button>
-            <button
-              className="btn btn-primary"
-              style={{
-                minWidth: "120px",
-                borderRadius: "50px",
-                fontWeight: "500",
-                transition: "all 0.3s ease",
-              }}
-              onClick={() => setSelectedCategory("accessoires")}
-            >
-              Accessoires
-            </button>
-            <button
-              className="btn btn-secondary"
-              style={{
-                minWidth: "120px",
-                borderRadius: "50px",
-                fontWeight: "500",
-                transition: "all 0.3s ease",
-              }}
-              onClick={() => setSelectedCategory("all")}
-            >
-              Toutes catégories
-            </button>
+              Filtrer par catégorie
+            </h5>
+            {/** les bouttons pour selectionné les catégories de produits  */}
+            <div className="d-flex justify-content-center flex-wrap gap-3">
+              <button
+                className="btn btn-primary"
+                style={{
+                  minWidth: "120px",
+                  borderRadius: "50px",
+                  fontWeight: "500",
+                  transition: "all 0.3s ease",
+                }}
+                onClick={() => setSelectedCategory("smartwatch")}
+              >
+                Smartwatch
+              </button>
+              <button
+                className="btn btn-primary"
+                style={{
+                  minWidth: "120px",
+                  borderRadius: "50px",
+                  fontWeight: "500",
+                  transition: "all 0.3s ease",
+                }}
+                onClick={() => setSelectedCategory("smartphone")}
+              >
+                Smartphone
+              </button>
+              <button
+                className="btn btn-primary"
+                style={{
+                  minWidth: "120px",
+                  borderRadius: "50px",
+                  fontWeight: "500",
+                  transition: "all 0.3s ease",
+                }}
+                onClick={() => setSelectedCategory("ordinateurs")}
+              >
+                Ordinateurs
+              </button>
+              <button
+                className="btn btn-primary"
+                style={{
+                  minWidth: "120px",
+                  borderRadius: "50px",
+                  fontWeight: "500",
+                  transition: "all 0.3s ease",
+                }}
+                onClick={() => setSelectedCategory("accessoires")}
+              >
+                Accessoires
+              </button>
+              <button
+                className="btn btn-secondary"
+                style={{
+                  minWidth: "120px",
+                  borderRadius: "50px",
+                  fontWeight: "500",
+                  transition: "all 0.3s ease",
+                }}
+                onClick={() => setSelectedCategory("all")}
+              >
+                Toutes catégories
+              </button>
+            </div>
           </div>
         </div>
       </center>
 
-      <div className="container " style={{ marginTop: "1rem" }}>
+      <div
+        className="container "
+        data-aos="fade-up"
+        data-aos-duration="3000"
+        style={{ marginTop: "1rem" }}
+      >
         <h5 className="ms-4"> Explorez nos produits</h5>
         <section
           style={{

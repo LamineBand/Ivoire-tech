@@ -149,16 +149,21 @@ function Contact() {
           width: "100%",
         }}
       >
-        <h3
-          style={{
-            fontSize: "2rem",
-            fontWeight: "700",
-            marginBottom: "1rem",
-          }}
-        >
-          Contactez-Nous
-        </h3>
+        <div data-aos="flip-left">
+          <h3
+            data-aos="flip-left"
+            style={{
+              fontSize: "2rem",
+              fontWeight: "700",
+              marginBottom: "1rem",
+            }}
+          >
+            Contactez-Nous
+          </h3>
+        </div>
+
         <p
+          data-aos="flip-left"
           style={{
             fontSize: "1.1rem",
             maxWidth: "600px",
@@ -175,7 +180,7 @@ function Contact() {
       <div className="container mt-5 mb-5">
         <div className="row">
           {/* FORMULAIRE */}
-          <div className="col-md-7 mb-5">
+          <div data-aos="flip-up" className="col-md-7 mb-5">
             <div
               style={{
                 backgroundColor: "#ffffff",
@@ -313,7 +318,7 @@ function Contact() {
           </div>
 
           {/* COORDONNÉES */}
-          <div className="col-md-5">
+          <div data-aos="flip-down" className="col-md-5">
             <div
               style={{
                 backgroundColor: "#ffffff",
