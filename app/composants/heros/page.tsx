@@ -37,7 +37,7 @@ function Hero() {
             }}
           >
             <div id="textHeros" className=" text-center text-lg-start">
-              <h1
+              <h3
                 className="fw-bold mb-3"
                 style={{
                   fontFamily: "Montserrat, sans-serif",
@@ -52,7 +52,7 @@ function Hero() {
                     loop: true,
                   }}
                 />
-              </h1>
+              </h3>
 
               <h4
                 className="mb-3"
