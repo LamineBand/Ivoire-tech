@@ -26,56 +26,58 @@ function Hero() {
     }
   }, []);
   return (
-    <div className="container " id="container_General">
+    <div className="container" id="container_General">
       <div className="row align-items-center" id="container_heros">
-        <div
-          className="col-lg-6 mb-4 p-5 rounded-5"
-          style={{
-            backgroundColor: "#ff6f00",
-            color: "#ffffff",
-          }}
-        >
-          <div id="textHeros" className=" text-center text-lg-start">
-            <h1
-              className="fw-bold mb-3"
-              style={{
-                fontFamily: "Montserrat, sans-serif",
+        <div className="col-lg-6 mb-4 ">
+          <div
+            className="p-5 rounded-5"
+            style={{
+              backgroundColor: "#ff6f00",
+              color: "#ffffff",
+            }}
+          >
+            <div id="textHeros" className=" text-center text-lg-start">
+              <h1
+                className="fw-bold mb-3"
+                style={{
+                  fontFamily: "Montserrat, sans-serif",
 
-                fontWeight: "700",
-              }}
-            >
-              <Typewriter
-                options={{
-                  strings: ["Bienvenue sur Ivoire-Tech"],
-                  autoStart: true,
-                  loop: true,
+                  fontWeight: "700",
                 }}
-              />
-            </h1>
+              >
+                <Typewriter
+                  options={{
+                    strings: ["Bienvenue sur Ivoire-Tech"],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </h1>
 
-            <h4
-              className="mb-3"
-              style={{
-                fontFamily: "Raleway, sans-serif",
-                fontStyle: "italic",
-                fontWeight: "500",
-              }}
-            >
-              Les dernières technologies à portée de main.
-            </h4>
+              <h4
+                className="mb-3"
+                style={{
+                  fontFamily: "Raleway, sans-serif",
+                  fontStyle: "italic",
+                  fontWeight: "500",
+                }}
+              >
+                Les dernières technologies à portée de main.
+              </h4>
 
-            <p
-              style={{
-                /**  color: "#2c2c2c", */
-                color: "#fff",
-                fontSize: "1rem",
-                fontFamily: "Open Sans , sans-serif",
-                fontWeight: "400",
-              }}
-            >
-              Smartphones, accessoires, ordinateurs & plus — aux meilleurs prix
-              en Côte d’Ivoire.
-            </p>
+              <p
+                style={{
+                  /**  color: "#2c2c2c", */
+                  color: "#fff",
+                  fontSize: "1rem",
+                  fontFamily: "Open Sans , sans-serif",
+                  fontWeight: "400",
+                }}
+              >
+                Smartphones, accessoires, ordinateurs & plus — aux meilleurs
+                prix en Côte d’Ivoire.
+              </p>
+            </div>
           </div>
         </div>
 
