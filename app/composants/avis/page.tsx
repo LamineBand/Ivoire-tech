@@ -54,7 +54,15 @@ function AvisClient() {
   return (
     <div data-aos="fade-up" data-aos-anchor-placement="center-bottom">
       <div className="container mb-5">
-        <h4 className="ms-4">Avis clients</h4>
+        <h4
+          className="ms-4"
+          style={{
+            fontFamily: "Open Sans",
+            fontWeight: "400",
+          }}
+        >
+          Avis clients
+        </h4>
         <Swiper
           modules={[Autoplay]}
           spaceBetween={20}

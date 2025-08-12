@@ -37,6 +37,7 @@ function Footer() {
                   fontSize: "1.5rem",
                   alignItems: "center",
                   justifyContent: "center",
+                  fontFamily: "Raleway ",
                 }}
               >
                 <FaStore className="me-2 mb-1" />
@@ -48,6 +49,8 @@ function Footer() {
                   lineHeight: "1.6",
                   color: "#b8c5d1",
                   marginBottom: "1rem",
+                  fontFamily: "Open Sans",
+                  fontWeight: "400",
                 }}
               >
                 Votre partenaire technologique de confiance en Côte d'Ivoire.

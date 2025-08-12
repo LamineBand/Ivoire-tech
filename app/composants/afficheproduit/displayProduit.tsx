@@ -194,7 +194,14 @@ const DisplayProduit: React.FC<Props> = ({
       <ToastContainer />
 
       <div className="mb-4 d-flex align-items-center">
-        <h3>Produits récent </h3>
+        <h3
+          style={{
+            fontFamily: "Raleway ",
+            fontWeight: "500",
+          }}
+        >
+          Produits récent{" "}
+        </h3>
         <Link
           href={"/pages/tout_produit/"}
           className="ms-auto link-tous-produits"
@@ -202,6 +209,8 @@ const DisplayProduit: React.FC<Props> = ({
             textDecoration: "none",
             color: "#ff6f00",
             fontSize: "1.1rem",
+            fontFamily: "Open Sans",
+            fontWeight: "400",
           }}
         >
           Tous les produits <GoArrowRight />
@@ -216,7 +225,12 @@ const DisplayProduit: React.FC<Props> = ({
         <div className="row g-4">
           {produits && produits.length === 0 ? (
             <div className="text-center">
-              <p className="text-muted">Aucun produit disponible.</p>
+              <p
+                className="text-muted"
+                style={{ fontFamily: "Open Sans", fontWeight: "400" }}
+              >
+                Aucun produit disponible.
+              </p>
             </div>
           ) : (
             produits?.map((prod) => (
@@ -238,19 +252,33 @@ const DisplayProduit: React.FC<Props> = ({
                       }}
                     />
                     <div className="card-body d-flex flex-column">
-                      <h5 className="card-title fw-bold">{prod.nomProduit}</h5>
+                      <h5
+                        className="card-title fw-bold"
+                        style={{
+                          fontFamily: "Raleway ",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {prod.nomProduit}
+                      </h5>
 
                       <p className="mb-1">
                         {prod.stockProduit === 0 ? (
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "red", fontFamily: "Open Sans" }}
+                          >
                             Produit en rupture de stock
                           </span>
                         ) : prod.stockProduit > 5 ? (
-                          <span style={{ color: "green" }}>
+                          <span
+                            style={{ color: "green", fontFamily: "Open Sans" }}
+                          >
                             Produit en stock
                           </span>
                         ) : (
-                          <span style={{ color: "red" }}>
+                          <span
+                            style={{ color: "red", fontFamily: "Open Sans" }}
+                          >
                             {prod.stockProduit} Produits restants
                           </span>
                         )}
@@ -301,7 +329,14 @@ const DisplayProduit: React.FC<Props> = ({
           <div className="modal-content">
             {/* Header */}
             <div className="modal-header border-bottom-0">
-              <h5 className="modal-title fw-bold" id="productDetailsLabel">
+              <h5
+                className="modal-title fw-bold"
+                id="productDetailsLabel"
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "500",
+                }}
+              >
                 Détails du produit
               </h5>
               <button
@@ -327,13 +362,27 @@ const DisplayProduit: React.FC<Props> = ({
 
                 {/* Infos */}
                 <div className="col-md-6">
-                  <h3 className="fw-bold mb-3">{DetailProd?.nomProduit}</h3>
+                  <h3
+                    className="fw-bold mb-3"
+                    style={{
+                      fontFamily: "Raleway ",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {DetailProd?.nomProduit}
+                  </h3>
 
-                  <p className="mb-1 text-muted">
+                  <p
+                    className="mb-1 text-muted"
+                    style={{ fontFamily: "Open Sans", fontWeight: "400" }}
+                  >
                     <strong>Catégorie :</strong> {DetailProd?.categorieProduit}
                   </p>
 
-                  <p className="mb-1 text-muted">
+                  <p
+                    className="mb-1 text-muted"
+                    style={{ fontFamily: "Open Sans", fontWeight: "400" }}
+                  >
                     <strong>Stock :</strong> {DetailProd?.stockProduit}
                   </p>
 
@@ -343,7 +392,11 @@ const DisplayProduit: React.FC<Props> = ({
 
                   <p
                     className="text-secondary mb-4"
-                    style={{ lineHeight: 1.6 }}
+                    style={{
+                      lineHeight: 1.6,
+                      fontFamily: "Open Sans",
+                      fontWeight: "400",
+                    }}
                   >
                     {DetailProd?.descriptionProduit}
                   </p>

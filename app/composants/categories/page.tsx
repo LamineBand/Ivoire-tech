@@ -30,7 +30,12 @@ const categories = [
 function Categorie_Section() {
   return (
     <div className="container mb-5">
-      <h2 className="text-center fw-bold mb-5">
+      <h2
+        className="text-center fw-bold mb-5"
+        style={{
+          fontFamily: "Raleway ,sans-serif",
+        }}
+      >
         Découvrez nos catégories technologiques
       </h2>
       <div className="row">
@@ -50,7 +55,12 @@ function Categorie_Section() {
                     alt={cat.label}
                   />
                   <div className="card-body text-center p-2">
-                    <h6 className="card-title mb-0">{cat.label}</h6>
+                    <h6
+                      className="card-title mb-0"
+                      style={{ fontFamily: "Open Sans , sans-serif" }}
+                    >
+                      {cat.label}
+                    </h6>
                   </div>
                 </div>
               </div>
@@ -83,10 +93,20 @@ function Categorie_Section() {
                   />
 
                   <div className="ms-3">
-                    <h5 className="mb-1 fw-bold">
+                    <h5
+                      className="mb-1 fw-bold"
+                      style={{
+                        fontFamily: "Raleway ",
+                      }}
+                    >
                       Son immersif et confort haut de gamme
                     </h5>
-                    <p className="mb-0 text-muted">
+                    <p
+                      className="mb-0 text-muted"
+                      style={{
+                        fontFamily: "Open Sans,sans-serif ",
+                      }}
+                    >
                       Profitez d’un son immersif avec réduction de bruit active.
                       Confortable, sans fil et idéal pour la musique, les appels
                       et les déplacements.
@@ -114,10 +134,20 @@ function Categorie_Section() {
                     }}
                   />
                   <div className="ms-3">
-                    <h5 className="mb-1 fw-bold">
+                    <h5
+                      className="mb-1 fw-bold"
+                      style={{
+                        fontFamily: "Raleway ",
+                      }}
+                    >
                       Polyvalente, fluide et idéale au quotidien
                     </h5>
-                    <p className="mb-0 text-muted">
+                    <p
+                      className="mb-0 text-muted"
+                      style={{
+                        fontFamily: "Open Sans,sans-serif ",
+                      }}
+                    >
                       Une tablette performante pour naviguer, regarder des
                       vidéos, travailler ou jouer. Écran HD, grande autonomie et
                       design léger.
@@ -145,10 +175,20 @@ function Categorie_Section() {
                     }}
                   />
                   <div className="ms-3">
-                    <h5 className="mb-1 fw-bold">
+                    <h5
+                      className="mb-1 fw-bold"
+                      style={{
+                        fontFamily: "Raleway ",
+                      }}
+                    >
                       Puissance et performance pour les gamers exigeants
                     </h5>
-                    <p className="mb-0 text-muted">
+                    <p
+                      className="mb-0 text-muted"
+                      style={{
+                        fontFamily: "Open Sans,sans-serif ",
+                      }}
+                    >
                       PC portable puissant au design moderne, idéal pour le
                       gaming, le multitâche et la création, avec écran Full HD
                       et carte graphique dédiée.
@@ -177,10 +217,20 @@ function Categorie_Section() {
                     }}
                   />
 
-                  <h3 className="mt-3 fw-bold">
+                  <h3
+                    className="mt-3 fw-bold"
+                    style={{
+                      fontFamily: "Raleway ",
+                    }}
+                  >
                     L’excellence Apple entre vos mains
                   </h3>
-                  <p className="text-muted">
+                  <p
+                    className="text-muted"
+                    style={{
+                      fontFamily: "Open Sans,sans-serif ",
+                    }}
+                  >
                     Découvrez l’iPhone, le smartphone emblématique d’Apple.
                     Élégant, fluide et puissant, il offre un écran lumineux, un
                     appareil photo performant et un système iOS sécurisé. Idéal
