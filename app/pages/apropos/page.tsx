@@ -514,142 +514,144 @@ function Apropos() {
               margin: "0 auto",
             }}
           >
-            <div
-              data-aos="fade-right"
-              style={{
-                textAlign: "center",
-                padding: "2rem",
-                borderRadius: "16px",
-                backgroundColor: "#f8fafc",
-                border: "1px solid #e2e8f0",
-              }}
-            >
+            <div id="confiance" className="mx-sm-5">
               <div
+                data-aos="fade-right"
                 style={{
-                  width: "70px",
-                  height: "70px",
-                  backgroundColor: "#eff6ff",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto 1.5rem auto",
+                  textAlign: "center",
+                  padding: "2rem",
+                  borderRadius: "16px",
+                  backgroundColor: "#f8fafc",
+                  border: "1px solid #e2e8f0",
                 }}
               >
-                <Shield size={35} color="#4f46e5" />
+                <div
+                  style={{
+                    width: "70px",
+                    height: "70px",
+                    backgroundColor: "#eff6ff",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "0 auto 1.5rem auto",
+                  }}
+                >
+                  <Shield size={35} color="#4f46e5" />
+                </div>
+                <h4
+                  style={{
+                    fontSize: "1.25rem",
+                    fontWeight: "600",
+                    color: "#1a202c",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Confiance
+                </h4>
+                <p
+                  style={{
+                    color: "#64748b",
+                    lineHeight: "1.6",
+                    margin: 0,
+                  }}
+                >
+                  Nous construisons des relations durables basées sur la
+                  transparence et l'honnêteté.
+                </p>
               </div>
-              <h4
-                style={{
-                  fontSize: "1.25rem",
-                  fontWeight: "600",
-                  color: "#1a202c",
-                  marginBottom: "1rem",
-                }}
-              >
-                Confiance
-              </h4>
-              <p
-                style={{
-                  color: "#64748b",
-                  lineHeight: "1.6",
-                  margin: 0,
-                }}
-              >
-                Nous construisons des relations durables basées sur la
-                transparence et l'honnêteté.
-              </p>
-            </div>
 
-            <div
-              data-aos="fade-up"
-              style={{
-                textAlign: "center",
-                padding: "2rem",
-                borderRadius: "16px",
-                backgroundColor: "#f8fafc",
-                border: "1px solid #e2e8f0",
-              }}
-            >
               <div
+                data-aos="fade-up"
                 style={{
-                  width: "70px",
-                  height: "70px",
-                  backgroundColor: "#f0fdf4",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto 1.5rem auto",
+                  textAlign: "center",
+                  padding: "2rem",
+                  borderRadius: "16px",
+                  backgroundColor: "#f8fafc",
+                  border: "1px solid #e2e8f0",
                 }}
               >
-                <Award size={35} color="#22c55e" />
+                <div
+                  style={{
+                    width: "70px",
+                    height: "70px",
+                    backgroundColor: "#f0fdf4",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "0 auto 1.5rem auto",
+                  }}
+                >
+                  <Award size={35} color="#22c55e" />
+                </div>
+                <h4
+                  style={{
+                    fontSize: "1.25rem",
+                    fontWeight: "600",
+                    color: "#1a202c",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Excellence
+                </h4>
+                <p
+                  style={{
+                    color: "#64748b",
+                    lineHeight: "1.6",
+                    margin: 0,
+                  }}
+                >
+                  Nous nous efforçons d'offrir la meilleure qualité dans tous
+                  nos produits et services.
+                </p>
               </div>
-              <h4
-                style={{
-                  fontSize: "1.25rem",
-                  fontWeight: "600",
-                  color: "#1a202c",
-                  marginBottom: "1rem",
-                }}
-              >
-                Excellence
-              </h4>
-              <p
-                style={{
-                  color: "#64748b",
-                  lineHeight: "1.6",
-                  margin: 0,
-                }}
-              >
-                Nous nous efforçons d'offrir la meilleure qualité dans tous nos
-                produits et services.
-              </p>
-            </div>
 
-            <div
-              data-aos="fade-left"
-              style={{
-                textAlign: "center",
-                padding: "2rem",
-                borderRadius: "16px",
-                backgroundColor: "#f8fafc",
-                border: "1px solid #e2e8f0",
-              }}
-            >
               <div
+                data-aos="fade-left"
                 style={{
-                  width: "70px",
-                  height: "70px",
-                  backgroundColor: "#fce7f3",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto 1.5rem auto",
+                  textAlign: "center",
+                  padding: "2rem",
+                  borderRadius: "16px",
+                  backgroundColor: "#f8fafc",
+                  border: "1px solid #e2e8f0",
                 }}
               >
-                <Heart size={35} color="#ec4899" />
+                <div
+                  style={{
+                    width: "70px",
+                    height: "70px",
+                    backgroundColor: "#fce7f3",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "0 auto 1.5rem auto",
+                  }}
+                >
+                  <Heart size={35} color="#ec4899" />
+                </div>
+                <h4
+                  style={{
+                    fontSize: "1.25rem",
+                    fontWeight: "600",
+                    color: "#1a202c",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Passion
+                </h4>
+                <p
+                  style={{
+                    color: "#64748b",
+                    lineHeight: "1.6",
+                    margin: 0,
+                  }}
+                >
+                  Notre amour pour la technologie nous pousse à toujours innover
+                  et nous améliorer.
+                </p>
               </div>
-              <h4
-                style={{
-                  fontSize: "1.25rem",
-                  fontWeight: "600",
-                  color: "#1a202c",
-                  marginBottom: "1rem",
-                }}
-              >
-                Passion
-              </h4>
-              <p
-                style={{
-                  color: "#64748b",
-                  lineHeight: "1.6",
-                  margin: 0,
-                }}
-              >
-                Notre amour pour la technologie nous pousse à toujours innover
-                et nous améliorer.
-              </p>
             </div>
           </div>
         </div>

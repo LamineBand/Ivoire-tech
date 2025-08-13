@@ -28,7 +28,7 @@ function Hero() {
   return (
     <div className="container" id="container_General">
       <div className="row align-items-center" id="container_heros">
-        <div className="col-lg-6 mb-4 ">
+        <div className="col-lg-6 mb-4">
           <div
             className="p-4 rounded-5"
             style={{
@@ -37,8 +37,8 @@ function Hero() {
             }}
           >
             <center>
-              <div id="textHeros" className="text-center">
-                <h1
+              <div id="textHeros" className="text-center m-0">
+                <span
                   id="text1"
                   className="fw-bold"
                   style={{
@@ -48,12 +48,12 @@ function Hero() {
                 >
                   <Typewriter
                     options={{
-                      strings: ["Ivoire-Tech"],
+                      strings: ["Bienvenue sur Ivoire-Tech"],
                       autoStart: true,
                       loop: true,
                     }}
                   />
-                </h1>
+                </span>
 
                 <h4
                   className="mb-3"
