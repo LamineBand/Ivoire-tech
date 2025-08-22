@@ -14,6 +14,7 @@ import {
 import Carous1 from "@/app/composants/carous1/page";
 import Navbar, { NavbarProps } from "@/app/composants/navbar/navbar";
 import axios from "axios";
+import { CommandeType } from "@/type/produit";
 
 function DashClient() {
   interface UserInfoType {

@@ -14,6 +14,7 @@ export async function POST(req: Request) {
       categorieProduit,
       descriptionProduit,
       imageProduit,
+      statut,
     } = await req.json();
 
     console.log("id vendeur est venu =", vendeur_id);
@@ -26,6 +27,7 @@ export async function POST(req: Request) {
       categorieProduit,
       descriptionProduit,
       imageProduit,
+      statut,
     });
 
     await sauv.save();

@@ -1,3 +1,4 @@
+import { CommandeType } from "@/type/produit";
 import axios from "axios";
 
 export async function ValiderCommande(

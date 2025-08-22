@@ -13,7 +13,13 @@ export async function Addproduit(
   setmess: React.Dispatch<React.SetStateAction<string>>,
   setload: React.Dispatch<React.SetStateAction<boolean>>,
   produits: Produit[],
-  setProduits: React.Dispatch<React.SetStateAction<Produit[]>>
+  setProduits: React.Dispatch<React.SetStateAction<Produit[]>>,
+  setNomProduit: React.Dispatch<React.SetStateAction<string>>,
+  setStockProduit: React.Dispatch<React.SetStateAction<number>>,
+  setPrixProduit: React.Dispatch<React.SetStateAction<number>>,
+  setCategorieProduit: React.Dispatch<React.SetStateAction<string>>,
+  setDescriptionProduit: React.Dispatch<React.SetStateAction<string>>,
+  setImageProduit: React.Dispatch<React.SetStateAction<string>>
 ) {
   try {
     setmess("");
@@ -29,6 +35,7 @@ export async function Addproduit(
       categorieProduit,
       descriptionProduit,
       imageProduit,
+      statut: "En attente",
     };
     console.log("objet qui est  envoyer au back =");
     console.log(data);
@@ -40,6 +47,12 @@ export async function Addproduit(
       console.log(rep);
       setProduits([...produits, data]);
       toast.success("Produit ajouter avec succès !");
+      setNomProduit(""),
+        setStockProduit(0),
+        setPrixProduit(0),
+        setCategorieProduit(""),
+        setDescriptionProduit(""),
+        setImageProduit("");
     } else {
       setload(false);
       setmess(req.data.mess);

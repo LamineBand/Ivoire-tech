@@ -1,3 +1,4 @@
+import { ProduitType1 } from "@/type/produit";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

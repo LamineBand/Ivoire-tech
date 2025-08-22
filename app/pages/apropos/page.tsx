@@ -17,6 +17,7 @@ import Footer from "@/app/composants/footer/footer";
 import { FaSearch } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
+import { ProduitType1 } from "@/type/produit";
 function Apropos() {
   const [produits, setProduits] = useState<ProduitType1[]>([]);
   const [search, setSearch] = useState("");
@@ -104,6 +105,7 @@ function Apropos() {
       imageProduit,
       vendeur_id,
       qte: 1,
+      statut: "En attente",
     };
     //modif((prev) => prev + 1);
     /**

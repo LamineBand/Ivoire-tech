@@ -24,6 +24,7 @@ import { IoClose } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
 import { Sendmess } from "@/app/controllers/client/contacter_nous";
+import { ProduitType1 } from "@/type/produit";
 
 function Contact() {
   const [produits, setProduits] = useState<ProduitType1[]>([]);
@@ -109,6 +110,7 @@ function Contact() {
       imageProduit,
       vendeur_id,
       qte: 1,
+      statut: "En attente",
     };
     //modif((prev) => prev + 1);
     /**

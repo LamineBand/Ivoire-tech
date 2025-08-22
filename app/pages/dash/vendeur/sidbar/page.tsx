@@ -58,7 +58,11 @@ function Sidebar() {
             </li>
 
             <li className="nav-item" id="li_text-side">
-              <Link href={"#"} id="textsid" className="fw-bold">
+              <Link
+                href={"/pages/dash/vendeur/cmd"}
+                id="textsid"
+                className="fw-bold"
+              >
                 <ClipboardList size={25} className="me-2" strokeWidth={1.8} />
                 Commandes
               </Link>

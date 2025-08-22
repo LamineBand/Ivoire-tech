@@ -1,4 +1,4 @@
-interface ProduitType1 {
+export interface ProduitType1 {
   _id?: string;
   nomProduit: string;
   prixProduit: number;
@@ -8,20 +8,30 @@ interface ProduitType1 {
   imageProduit?: string;
   vendeur_id: string;
   qte: number;
+  statut: string;
 }
-interface ClientType {
+export interface ClientType {
   uid: string;
   nom: string;
   tel: string;
   adresse: string;
   ville: string;
 }
-interface CommandeType {
+export interface CommandeType {
   ref: string;
   date: string;
   userinfo: ClientType;
   produits: ProduitType1[];
   total: number;
+  // adresse: string;
+  statut: string;
+}
+export interface cmdfiltre {
+  ref: string;
+  date: string;
+  clientInfo: ClientType;
+  produits: ProduitType1[];
+  //total: number;
   // adresse: string;
   statut: string;
 }

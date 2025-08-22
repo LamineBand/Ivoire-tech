@@ -8,6 +8,7 @@ const produitschema = new Schema({
   categorieProduit: { type: String },
   descriptionProduit: { type: String },
   imageProduit: { type: String },
+  statut: { type: String },
 });
 
 const Produits_Model = models.Produits || model("Produits", produitschema);

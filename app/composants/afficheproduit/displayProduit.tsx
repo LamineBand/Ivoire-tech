@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingCart, Eye } from "lucide-react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -11,8 +11,9 @@ import useSeachStore from "@/app/store/affiche_Seach";
 import { IoClose } from "react-icons/io5";
 import { GoArrowRight } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
-import { MdOutlineRemoveRedEye, MdRemoveRedEye } from "react-icons/md";
+import { MdRemoveRedEye } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
+import { ProduitType1 } from "@/type/produit";
 
 interface Props {
   //  modif: Dispatch<SetStateAction<number>>;
@@ -113,6 +114,7 @@ const DisplayProduit: React.FC<Props> = ({
       descriptionProduit,
       imageProduit,
       vendeur_id,
+      statut,
     } = produit;
     const element = {
       _id,
@@ -124,6 +126,7 @@ const DisplayProduit: React.FC<Props> = ({
       imageProduit,
       vendeur_id,
       qte: 1,
+      statut,
     };
     //modif((prev) => prev + 1);
     settabPanier((prevTab) => {
@@ -142,7 +145,7 @@ const DisplayProduit: React.FC<Props> = ({
     compteurPanier();
     //localStorage.setItem("panier", JSON.stringify(tabPanier));
   };
-  console.log("dan storeeee");
+  console.log("dan storeeee==");
   console.log(StorePanier);
 
   //  console.log("element dans store ===");

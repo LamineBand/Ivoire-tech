@@ -4,6 +4,7 @@ import Footer from "@/app/composants/footer/footer";
 import Navbar, { NavbarProps } from "@/app/composants/navbar/navbar";
 import useSeachStore from "@/app/store/affiche_Seach";
 import { Store_Panier } from "@/app/store/panier";
+import { ProduitType1 } from "@/type/produit";
 import axios from "axios";
 import { Eye, ShoppingCart } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -121,6 +122,7 @@ function Nos_produit() {
       imageProduit,
       vendeur_id,
       qte: 1,
+      statut: "En attente",
     };
     //modif((prev) => prev + 1);
     /**

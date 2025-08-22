@@ -32,7 +32,7 @@ interface Produit {
 }
 
 function Produit() {
-  // ✅ VARIABLES D'ÉTAT POUR LE FORMULAIRE
+  //  VARIABLES D'ÉTAT POUR LE FORMULAIRE
   const [nomProduit, setNomProduit] = useState("");
   const [stockProduit, setStockProduit] = useState(0);
   const [prixProduit, setPrixProduit] = useState(0);
@@ -45,7 +45,7 @@ function Produit() {
   const [tab, settab] = useState<Produit[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [identV, setidentV] = useState("");
-  // ✅ VARIABLES D'ÉTAT POUR LA MODIF DE PRODUIT
+
   const [nouv_nomProduit, setnouv_NomProduit] = useState("");
   const [nouv_stockProduit, setnouv_StockProduit] = useState(0);
   const [nouv_prixProduit, setnouv_PrixProduit] = useState(0);
@@ -119,7 +119,13 @@ function Produit() {
       setmess,
       setload,
       produits,
-      setProduits
+      setProduits,
+      setNomProduit,
+      setStockProduit,
+      setPrixProduit,
+      setCategorieProduit,
+      setDescriptionProduit,
+      setImageProduit
     );
     /*console.log({
       nomProduit,
@@ -130,6 +136,7 @@ function Produit() {
       imageProduit,
     });*/
   };
+  //supprimer produit
   const handleSuppProd = async (
     e: React.FormEvent<HTMLFormElement>,
     id: string
@@ -170,11 +177,14 @@ function Produit() {
     console.log(imageProduit);
   }, [imageProduit]);
 
+  {
+    /**
+     * 
+     * 
   //pour image imagekit
   //Upload avec ImageKit
   const [file, setFile] = useState<File | null>(null);
-
-  const handleImageChange = (file: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (file: React.ChangeEvent<HTMLInputElement>) => {
     const fileSelected = file?.target?.files![0];
     if (fileSelected) {
       console.log(fileSelected);
@@ -221,6 +231,8 @@ function Produit() {
       console.log(error);
     }
   };
+  */
+  }
 
   return (
     <div className="container-fluid">
@@ -263,62 +275,83 @@ function Produit() {
 
           {/* Grille de produits */}
           <div className="row g-4">
-            {produits.map((item) => (
-              <div key={item._id!} className="col-md-4">
-                {/**debu de car */}
-                <div className="card h-100 border-0 shadow rounded-4 overflow-hidden">
-                  <div
-                    className=" d-flex align-items-center justify-content-center"
-                    style={{ height: "160px" }}
-                  >
-                    <img
-                      src={
-                        item.imageProduit ||
-                        "https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
-                      }
-                      alt="Produit"
-                      className="mt-2"
-                      style={{
-                        maxHeight: "100%",
-                        maxWidth: "100%",
-                        objectFit: "contain",
-                      }}
-                    />
-                  </div>
-                  <div className="card-body text-center px-3 py-2">
-                    <h5 className="card-title fw-semibold mb-1">
-                      {item.nomProduit}
-                    </h5>
-                    <p className="card-text text-secondary small mb-1">
-                      Catégorie : {item.categorieProduit}
-                    </p>
-                    <p className="fw-bold text-primary fs-5 mb-0">
-                      {item.prixProduit} FCFA
-                    </p>
-                  </div>
-                  <div className="card-footer bg-white border-0 d-flex justify-content-between px-3 pb-3">
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#modifproduit"
-                      className="btn btn-sm btn-outline-primary rounded-pill px-3"
-                      onClick={(e) => rechercheProduit(item._id!)}
-                    >
-                      Modifier
-                    </button>
-                    <form onSubmit={(e) => handleSuppProd(e, item._id!)}>
-                      <button
-                        type="submit"
-                        className="btn btn-sm btn-outline-danger rounded-pill px-3"
-                      >
-                        Supprimer
-                      </button>
-                    </form>
-                  </div>
+            {produits.length === 0 ? (
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ height: "200px" }}
+              >
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Chargement...</span>
                 </div>
-
-                {/**fin de card */}
               </div>
-            ))}
+            ) : (
+              <div className="row g-4">
+                {produits.map((item) => (
+                  <div key={item._id!} className="col-md-4">
+                    <div className="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                      {/* Image pleine largeur */}
+                      <div
+                        className="w-100"
+                        style={{ height: "180px", overflow: "hidden" }}
+                      >
+                        <img
+                          src={
+                            item.imageProduit ||
+                            "https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+                          }
+                          alt={item.nomProduit}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            transition: "transform 0.3s",
+                          }}
+                        />
+                      </div>
+
+                      {/* Card Body */}
+                      <div className="card-body text-center px-3 py-3">
+                        <h5
+                          className="card-title fw-bold mb-1 text-truncate"
+                          title={item.nomProduit}
+                        >
+                          {item.nomProduit}
+                        </h5>
+                        <p className="text-secondary small mb-2">
+                          {item.categorieProduit}
+                        </p>
+                        <p className="fw-bold text-primary fs-5 mb-0">
+                          {new Intl.NumberFormat("fr-FR").format(
+                            item.prixProduit
+                          )}{" "}
+                          FCFA
+                        </p>
+                      </div>
+
+                      {/* Card Footer */}
+                      <div className="card-footer bg-white border-0 d-flex justify-content-between px-3 py-3">
+                        <button
+                          data-bs-toggle="modal"
+                          data-bs-target="#modifproduit"
+                          className="btn btn-sm btn-outline-primary rounded-pill px-4 fw-semibold"
+                          onClick={() => rechercheProduit(item._id!)}
+                        >
+                          Modifier
+                        </button>
+                        <form onSubmit={(e) => handleSuppProd(e, item._id!)}>
+                          <button
+                            type="submit"
+                            className="btn btn-sm btn-outline-danger rounded-pill px-4 fw-semibold"
+                          >
+                            Supprimer
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </main>
       </div>
@@ -425,24 +458,33 @@ function Produit() {
                   <label htmlFor="imageProduit" className="form-label">
                     Image du produit
                   </label>
-                  <div>
+                  <div className="my-3 p-3 border rounded shadow-sm bg-light">
                     <FileUploaderRegular
                       pubkey="8ed532fcdc0227b44723"
-                      /*   pubKey={process.env.NEXT_PUBLIC_IMG!} */
                       onChange={uploadImage}
+                      sourceList="local" // ✅ string et non string[]
+                      imgOnly // optionnel : n’accepte que des images
                     />
 
-                    <img src={imageProduit || "pas img"} alt="img" />
-
-                    {/*Upload avec imagekit 
-                    <div className="mb-3">
-                      <input
-                        type="file"
-                        className="form-control"
-                        onChange={handleImageChange}
-                      />
-                    </div>
-                    */}
+                    {imageProduit ? (
+                      <div className="text-center mt-3">
+                        <img
+                          src={imageProduit}
+                          alt="Image du produit"
+                          style={{
+                            maxWidth: "200px",
+                            maxHeight: "200px",
+                            objectFit: "cover",
+                            borderRadius: "10px",
+                            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <p className="text-muted text-center mt-3">
+                        Aucune image sélectionnée
+                      </p>
+                    )}
                   </div>
                 </div>
                 {load ? (
@@ -477,7 +519,7 @@ function Produit() {
                     Ajouter le produit
                   </button>
                 )}
-                <a onClick={() => sendImage()}> envoie img</a>
+                {/**   <a onClick={() => sendImage()}> envoie img</a> */}
               </form>
             </div>
 

@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const cmd_Schema = new Schema({
-  ref: { type: String },
+  ref: { type: String, required: true, unique: true },
   date: { type: String },
   userinfo: {},
   produits: [],

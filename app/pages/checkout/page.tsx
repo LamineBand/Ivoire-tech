@@ -5,6 +5,7 @@ import { Store_Panier } from "@/app/store/panier";
 import Link from "next/link";
 import { IoMdArrowBack } from "react-icons/io";
 import { ValiderCommande } from "@/app/controllers/client/checkout";
+import { ClientType, CommandeType } from "@/type/produit";
 
 function Checkout() {
   // recupération des produits du panier dans le store
